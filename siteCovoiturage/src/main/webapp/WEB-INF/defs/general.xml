@@ -5,10 +5,8 @@
 <tiles-definitions>
 	<definition name="common" template="/WEB-INF/layout/classic.jsp">
 		<put-attribute name="title" value="Tiles tutorial homepage" />
-
 		<put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
 	</definition>
-
 	<definition name="annonces" extends="common">
 		<put-attribute name="title" value="annonces" />
 		<put-attribute name="body" value="/WEB-INF/views/annonces.jsp" />
@@ -42,26 +40,12 @@
 	</definition>
 	<definition name="login" extends="common">
 		<put-attribute name="title" value="Page de connexion" />
-		<put-attribute name="body"
-			value="/WEB-INF/views/login.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/login.jsp" />
 		<put-attribute name="current" value="login"></put-attribute>
 	</definition>
-	
 	<definition name="profil" extends="common">
 		<put-attribute name="title" value="profil" />
-		<put-attribute name="body"
-			value="/WEB-INF/views/profil.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/profil.jsp" />
 		<put-attribute name="current" value="profil"></put-attribute>
 	</definition>
-
-
-
-
-
-
-
-
-
-
 </tiles-definitions>
-

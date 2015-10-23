@@ -4,9 +4,6 @@ import java.security.Principal;
 
 import javax.validation.Valid;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,6 +24,9 @@ import com.site.covoiturage.model.Annonce;
 import com.site.covoiturage.model.User;
 import com.site.covoiturage.services.AnnonceService;
 import com.site.covoiturage.services.UserService;
+
+import lombok.Getter;
+import lombok.Setter;
 
 @Controller
 @Getter

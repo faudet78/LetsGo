@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
-	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xmlns:task="http://www.springframework.org/schema/task"
 	xmlns:repository="http://www.springframework.org/schema/data/repository"
 	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
@@ -48,11 +45,10 @@
 		</property>
 	</bean>
 	<tx:annotation-driven transaction-manager="transactionManager" />
-
 	<jpa:repositories base-package="com.site.covoiturage.repositories"></jpa:repositories>
 	<import resource="security.xml" />
 	<tx:annotation-driven />
-<!-- 	<mvc:resources location="/resources/files/" mapping="/resources/**" /> -->
+	<!-- <mvc:resources location="/resources/files/" mapping="/resources/**" 
+		/> -->
 	<mvc:resources location="/resources/files/" mapping="/resources/**" />
 </beans>
-

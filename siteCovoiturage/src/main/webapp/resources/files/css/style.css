@@ -133,16 +133,6 @@ input {
 	background-image: url(/form/images/blue_button_hover.png);
 }
 /* enable absolute positioning */
-.inner-addon { 
-    position: relative; 
+.inner-addon {
+	position: relative;
 }
-
-
-
-
-
-
-
-
-
-

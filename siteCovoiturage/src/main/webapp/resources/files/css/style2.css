@@ -5960,10 +5960,12 @@ a.MemberCard-profile .MemberCard-name {
 	flex-direction: column;
 	width: 100%;
 	float: left\9
+
 }
 
 .top-search .Column {
 	width: 218px\9
+
 }
 
 .Column+.Column {
@@ -7573,7 +7575,11 @@ html[data-locale|=en_IN] .mobile-first.carsharing-new .hp-hero-intro {
 
 20%{
 -webkit-transform
+
+
 :translateX(-5px)
+
+
 }
 }
 @
@@ -7583,7 +7589,11 @@ html[data-locale|=en_IN] .mobile-first.carsharing-new .hp-hero-intro {
 
 20%{
 -moz-transform
+
+
 :translateX(-5px)
+
+
 }
 }
 @
@@ -7593,7 +7603,11 @@ html[data-locale|=en_IN] .mobile-first.carsharing-new .hp-hero-intro {
 
 20%{
 -o-transform
+
+
 :translateX(-5px)
+
+
 }
 }
 @
@@ -7603,7 +7617,11 @@ keyframes bounceLeftRight { 0%,30%,100%{
 
 20%{
 transform
+
+
 :translateX(-5px)
+
+
 }
 }
 .home-driver-container {
@@ -10599,6 +10617,7 @@ a.btn-edit:active {
 
 .regular .btn-group {
 	max-width: 223px \9
+
 }
 
 .regular .btn-group>.btn.active {
@@ -12588,7 +12607,6 @@ input[type="email"].email {
 }
 
 .trip-search-oneresult:hover {
-	
 	color: #666;
 	background: #E6E6FA
 }
@@ -14394,6 +14412,7 @@ a[data-target="#telphone"] {
 .table-route .cell-empty {
 	line-height: 88px;
 	line-height: 95px\9
+
 }
 
 @media screen and (-ms-high-contrast: active) , ( -ms-high-contrast :
@@ -20439,6 +20458,7 @@ li>span.mobile {
 .booking-explanation li:first-child {
 	padding-left: 55px;
 	padding-left: 54px\9
+
 }
 
 .booking-explanation li:first-child:before {
