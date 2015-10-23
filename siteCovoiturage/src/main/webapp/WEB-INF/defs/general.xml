@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<definition name="common" template="/WEB-INF/layout/classic.jsp">
+		<put-attribute name="title" value="Tiles tutorial homepage" />
+
+		<put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
+	</definition>
+
+	<definition name="annonces" extends="common">
+		<put-attribute name="title" value="annonces" />
+		<put-attribute name="body" value="/WEB-INF/views/annonces.jsp" />
+		<put-attribute name="current" value="annonces"></put-attribute>
+	</definition>
+	<definition name="inscription" extends="common">
+		<put-attribute name="title" value="inscription" />
+		<put-attribute name="body" value="/WEB-INF/views/inscription.jsp" />
+		<put-attribute name="current" value="inscription"></put-attribute>
+	</definition>
+	<definition name="index" extends="common">
+		<put-attribute name="title" value="covoiturage" />
+		<put-attribute name="body" value="/WEB-INF/views/index.jsp" />
+		<put-attribute name="current" value="inscription"></put-attribute>
+	</definition>
+	<definition name="poster-annonce" extends="common">
+		<put-attribute name="title" value="covoiturage" />
+		<put-attribute name="body" value="/WEB-INF/views/poster-annonce.jsp" />
+		<put-attribute name="current" value="poster-annonce"></put-attribute>
+	</definition>
+	<definition name="annonce-details" extends="common">
+		<put-attribute name="title" value="Annonce details" />
+		<put-attribute name="body" value="/WEB-INF/views/annonce-details.jsp" />
+		<put-attribute name="current" value="annonce-details"></put-attribute>
+	</definition>
+	<definition name="annonceByadresse" extends="common">
+		<put-attribute name="title" value="Resultat de la recherche" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/annonceByadresse.jsp" />
+		<put-attribute name="current" value="annonceByadresse"></put-attribute>
+	</definition>
+	<definition name="login" extends="common">
+		<put-attribute name="title" value="Page de connexion" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/login.jsp" />
+		<put-attribute name="current" value="login"></put-attribute>
+	</definition>
+	
+	<definition name="profil" extends="common">
+		<put-attribute name="title" value="profil" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/profil.jsp" />
+		<put-attribute name="current" value="profil"></put-attribute>
+	</definition>
+
+
+
+
+
+
+
+
+
+
+</tiles-definitions>
+
