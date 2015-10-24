@@ -63,53 +63,26 @@
 	border-top-right-radius: 0;
 }
 </style>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
->
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/resources/css/style2.css"
->
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/resources/css/style.css"
->
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/resources/css/style1.css"
->
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/resources/css/jquery.steps.css"
->
-<link rel="stylesheet" type="text/css"
-	href="../../resources/files/css/style.css"
->
-<link rel="stylesheet" type="text/css"
-	href="../../resources/files/css/bootstrap.min.css"
->
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/style2.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/style.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/style1.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/jquery.steps.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/jquery.datetimepicker.css">
+<link rel="stylesheet" type="text/css" href="../../resources/files/css/style.css">
+<link rel="stylesheet" type="text/css" href="../../resources/files/css/bootstrap.min.css">
 <link rel="stylesheet" href="../../resources/files/css/style2.css">
 <link rel="stylesheet" href="../../resources/files/css/style1.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css"
-/>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css"
-/>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"
-></script>
-<script type="text/javascript"
-	src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.10.0/jquery.validate.js"
-></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"
-></script>
-<script type="text/javascript"
-	src="<%=request.getContextPath()%>/resources/js/jquery.steps.js"
-></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"
-></script>
-<!--jquery js autocomplete  -->
-<%-- <script type="text/javascript"
-	src="https://<a href="http://www.jqueryscript.net/tags.php?/map/">map</a>s.googleapis.com/maps/api/js?sensor=true&libraries=places"></script> --%>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css"/>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.10.0/jquery.validate.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/jquery.steps.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/jquery.datetimepicker.full.min.js"></script>
+
 <title><tiles:getAsString name="title"></tiles:getAsString></title>
 </head>
 <body>
@@ -188,13 +161,17 @@
 								}
 							});
 
-					$('#dateRangePicker').datepicker({
+					$('#datePicker').datepicker({
 						format : 'dd/mm/yyyy',
-						startDate : '01/01/2010',
-						endDate : '12/30/2020'
+						startDate:'0'
 					});
 					
-
+					
+					$('#timePicker').datetimepicker({
+						datepicker : false,
+						step : 15
+					});
+					
 				});
 		$('.registrationForm')
 				.validate(

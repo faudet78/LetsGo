@@ -59,7 +59,7 @@
 							src="<%=request.getContextPath()%>/resources/images/map-marker-red.png"
 						></i></div>
 					<div class="form-group date input-group input-append date field "
-					id="dateRangePicker"
+					id="datePicker"
 				><input type="text" class="form-control" name="jourDepart"
 						value="${jourDepart }" placeholder="Date de départ"
 					/> <span class="input-group-addon add-on"><span

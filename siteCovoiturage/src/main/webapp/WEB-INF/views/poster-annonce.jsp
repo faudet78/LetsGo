@@ -24,7 +24,7 @@
 			<h5><strong>Départ</strong></h5>
 			<div class="thumbnail" style="background-color: #F5F5F5; padding-top: 15px;">
 				<div class="form-group">
-					<label for="adresseDepart" class="control-label col-sm-3 col-sm-offset-2  ">Ville de départ <strong style="color: red">*</strong></label>
+					<label for="adresseDepart" class="control-label col-sm-3 col-sm-offset-2">Ville de départ <strong style="color: red">*</strong></label>
 					<div class="col-sm-3 has-feedback">
 						<form:input path="adresseDepart" cssClass="form-control placepicker" placeholder="Exemple: Paris" />
 						<i class="form-control-feedback">
@@ -66,60 +66,19 @@
 			<div class="thumbnail" style="background-color: #F5F5F5; padding-top: 15px;">
 				<div class="row ">
 					<div class="col-sm-2 col-sm-offset-3">
-						<div class="form-group date input-group input-append date field" id="dateRangePicker">
+						<div class="form-group input-group input-append field date" id="datePicker">
 							<input type="text" class="form-control" name="jourDepart" value="${jourDepart}" placeholder="JJ/MM/AAAA" />
 							<span class="input-group-addon add-on">
-								<span class="glyphicon glyphicon-calendar "></span>
+								<span class="glyphicon glyphicon-calendar"></span>
 							</span>
 						</div>
 					</div>
 					<div class="col-sm-2">
-						<div class="form-group">
-							<form:select path="heureDepart" cssClass="form-control">
-								<form:option value="00">00h</form:option>
-								<form:option value="01">01h</form:option>
-								<form:option value="02">02h</form:option>
-								<form:option value="03">03h</form:option>
-								<form:option value="04">04h</form:option>
-								<form:option value="05">05h</form:option>
-								<form:option value="06">06h</form:option>
-								<form:option value="07">07h</form:option>
-								<form:option value="08">08h</form:option>
-								<form:option value="09">09h</form:option>
-								<form:option value="10">10h</form:option>
-								<form:option value="11">11h</form:option>
-								<form:option value="12">12h</form:option>
-								<form:option value="13">13h</form:option>
-								<form:option value="14">14h</form:option>
-								<form:option value="15">15h</form:option>
-								<form:option value="16">16h</form:option>
-								<form:option value="17">17h</form:option>
-								<form:option value="18">18h</form:option>
-								<form:option value="19">19h</form:option>
-								<form:option value="20">20h</form:option>
-								<form:option value="21">21h</form:option>
-								<form:option value="22">22h</form:option>
-								<form:option value="23">23h</form:option>
-							</form:select> 
-							<form:errors path="heureDepart"></form:errors>
-						</div>
-					</div>
-					<div class="col-sm-2">
-						<div class="form-group ">
-							<form:select path="minDepart" cssClass="form-control">
-								<form:option value="00">00min</form:option>
-								<form:option value="05">05min</form:option>
-								<form:option value="10">10min</form:option>
-								<form:option value="15">15min</form:option>
-								<form:option value="20">20min</form:option>
-								<form:option value="25">25min</form:option>
-								<form:option value="30">30min</form:option>
-								<form:option value="35">35min</form:option>
-								<form:option value="40">40min</form:option>
-								<form:option value="45">45min</form:option>
-								<form:option value="50">50min</form:option>
-								<form:option value="55">55min</form:option>
-							</form:select></div>
+						<div class="form-group input-group input-append field" id="timePicker">
+							<input type="text" class="form-control" name="heureDepart" value="${heureDepart}" placeholder="HH:MM" />
+							<span class="input-group-addon add-on">
+								<span class="glyphicon glyphicon-time"></span>
+							</span>
 						</div>
 					</div>
 				</div>
