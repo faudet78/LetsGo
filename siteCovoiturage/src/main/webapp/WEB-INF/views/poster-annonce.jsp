@@ -27,7 +27,7 @@
 					<div class="form-group">
 						<label for="adresseDepart" class="control-label col-sm-3 col-sm-offset-2">Ville de départ <strong style="color: red">*</strong></label>
 						<div class="col-sm-3 has-feedback">
-							<form:input path="adresseDepart" cssClass="form-control placepicker" placeholder="Exemple: Paris" />
+							<form:input path="adresseDepart" cssClass="form-control placepicker" placeholder="Exemple : Paris" />
 							<i class="form-control-feedback">
 								<img width="20"style="margin-top: 7px;" height="20" alt="search"src="<%=request.getContextPath()%>/resources/images/map-marker-green.png">
 							</i>
@@ -41,6 +41,26 @@
 							<form:errors path="lieuDepart"></form:errors>
 						</div>
 					</div>
+					
+					<div class="form-group">
+						<label class="control-label col-sm-3 col-sm-offset-2">Date et heure de départ <strong style="color: red">*</strong></label>
+						<div class="col-sm-2">
+							<div id="datePicker" class="form-group input-group input-append field date">
+								<form:input path="jourDepart" cssClass="form-control" placeholder="JJ/MM/AAAA" />
+								<span class="input-group-addon add-on">
+									<span class="glyphicon glyphicon-calendar"></span>
+								</span>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div id="heurePicker" class="form-group input-group input-append field date">
+								<input type="text" class="form-control" name="heureDepart" value="${heureDepart}" placeholder="HH:MM" />
+								<span class="input-group-addon add-on">
+									<span class="glyphicon glyphicon-time"></span>
+								</span>
+							</div>
+						</div>
+					</div>
 				</div>
 				<h5><strong>Arrivée</strong></h5>
 				<div class="thumbnail" style="background-color: #F5F5F5; padding-top: 15px;">
@@ -48,7 +68,7 @@
 						<label for="adresseArrivee" class="control-label col-sm-3 col-sm-offset-2 ">Ville d'arrivée <strong style="color: red">*</strong>
 					</label>
 						<div class="col-sm-3">
-							<form:input path="adresseArrivee" cssClass="form-control placepicker" placeholder="Exemple: Paris" />
+							<form:input path="adresseArrivee" cssClass="form-control placepicker" placeholder="Exemple : Marseille" />
 								<i class="form-control-feedback">
 									<img width="20" style="margin-top: 7px;" height="20" alt="search" src="<%=request.getContextPath()%>/resources/images/map-marker-red.png">
 								</i>
@@ -60,27 +80,6 @@
 						<div class="col-sm-3">
 							<form:input path="lieuDepart" cssClass="form-control" placeholder="Lieu d'arrivée" data-toggle="tooltip" data-placement="right" title="Indiquer un lieu d'arrivée, pour donner plus de précisions à vos passagers"/>
 							<form:errors path="lieuDepart"></form:errors>
-						</div>
-					</div>
-				</div>
-				<h5><strong>Date et heure de départ</strong></h5>
-				<div class="thumbnail" style="background-color: #F5F5F5; padding-top: 15px;">
-					<div class="row ">
-						<div class="col-sm-2 col-sm-offset-3">
-							<div class="form-group input-group input-append field date" id="datePicker">
-								<input type="text" class="form-control" name="jourDepart" value="${jourDepart}" placeholder="JJ/MM/AAAA" />
-								<span class="input-group-addon add-on">
-									<span class="glyphicon glyphicon-calendar"></span>
-								</span>
-							</div>
-						</div>
-						<div class="col-sm-2">
-							<div class="form-group input-group input-append field" id="timePicker">
-								<input type="text" class="form-control" name="heureDepart" value="${heureDepart}" placeholder="HH:MM" />
-								<span class="input-group-addon add-on">
-									<span class="glyphicon glyphicon-time"></span>
-								</span>
-							</div>
 						</div>
 					</div>
 				</div>

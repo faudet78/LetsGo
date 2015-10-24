@@ -86,7 +86,6 @@ public class Annonce implements Serializable {
 		super();
 		this.adresseDepart = adresseDepart;
 		this.adresseArrivee = adresseArrivee;
-
 		this.placeProposees = placeProposees;
 		this.fumeurActive = fumeurActive;
 		this.jourDepart = jourDepart;

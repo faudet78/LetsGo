@@ -167,7 +167,7 @@
 					});
 					
 					
-					$('#timePicker').datetimepicker({
+					$('#heurePicker').datetimepicker({
 						datepicker : false,
 						step : 15
 					});
