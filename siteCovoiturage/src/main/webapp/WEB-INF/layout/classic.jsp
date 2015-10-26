@@ -62,6 +62,23 @@
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
 }
+
+//popup
+.modal {
+	display: block !important;
+	/* I added this to see the modal, you don't need this */
+}
+
+/* Important part */
+#myModal .modal-dialog, #myModal1 .modal-dialog {
+	overflow-y: initial !important;
+	width:60%;
+}
+
+.modal-body {
+	height: 510px;
+	overflow-y: auto;
+}
 </style>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
