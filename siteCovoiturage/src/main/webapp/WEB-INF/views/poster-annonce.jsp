@@ -44,17 +44,17 @@
 					
 					<div class="form-group">
 						<label class="control-label col-sm-3 col-sm-offset-2">Date et heure de départ <strong style="color: red">*</strong></label>
-						<div class="col-sm-2">
+						<div class="col-sm-2" >
 							<div id="datePicker" class="form-group input-group input-append field date">
-								<form:input path="jourDepart" cssClass="form-control" placeholder="JJ/MM/AAAA" />
+								<form:input path="jourDepart" cssClass="form-control" placeholder="JJ/MM/AAAA"  />
 								<span class="input-group-addon add-on">
 									<span class="glyphicon glyphicon-calendar"></span>
 								</span>
 							</div>
 						</div>
 						<div class="col-sm-2">
-							<div id="heurePicker" class="form-group input-group input-append field date">
-								<input type="text" class="form-control" name="heureDepart" value="${heureDepart}" placeholder="HH:MM" />
+							<div  class="form-group input-group input-append field date">
+							<form:input path="heureDepart" cssClass="form-control" placeholder="HH:MM"  id="heurePicker"  />
 								<span class="input-group-addon add-on">
 									<span class="glyphicon glyphicon-time"></span>
 								</span>

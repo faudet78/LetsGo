@@ -37,7 +37,7 @@ public class Annonce implements Serializable {
 
 	private String jourDepart;
 
-	private int heureDepart;
+	private String heureDepart;
 
 	private int minDepart;
 
@@ -80,24 +80,18 @@ public class Annonce implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Annonce(String adresseDepart, String adresseArrivee, Long placeProposees, boolean fumeurActive,
-			String jourDepart, int heureDepart, int minDepart, int prix, String typeTrajet, String vehicule,
-			String lieuDepart, String lieuArrivee, String details, User user) {
-		super();
-		this.adresseDepart = adresseDepart;
-		this.adresseArrivee = adresseArrivee;
-		this.placeProposees = placeProposees;
-		this.fumeurActive = fumeurActive;
-		this.jourDepart = jourDepart;
-		this.heureDepart = heureDepart;
-		this.minDepart = minDepart;
-		this.prix = prix;
-		this.typeTrajet = typeTrajet;
-		this.vehicule = vehicule;
-		this.lieuDepart = lieuDepart;
-		this.lieuArrivee = lieuArrivee;
-		this.details = details;
-		this.user = user;
-	}
+	/*
+	 * public Annonce(String adresseDepart, String adresseArrivee, Long
+	 * placeProposees, boolean fumeurActive, String jourDepart, String
+	 * heureDepart, int minDepart, int prix, String typeTrajet, String vehicule,
+	 * String lieuDepart, String lieuArrivee, String details, User user) {
+	 * super(); this.adresseDepart = adresseDepart; this.adresseArrivee =
+	 * adresseArrivee; this.placeProposees = placeProposees; this.fumeurActive =
+	 * fumeurActive; this.jourDepart = jourDepart; this.heureDepart =
+	 * heureDepart; this.minDepart = minDepart; this.prix = prix; this.typeTrajet
+	 * = typeTrajet; this.vehicule = vehicule; this.lieuDepart = lieuDepart;
+	 * this.lieuArrivee = lieuArrivee; this.details = details; this.user = user;
+	 * }
+	 */
 
 }

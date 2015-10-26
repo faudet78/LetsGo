@@ -165,10 +165,13 @@
 						format : 'dd/mm/yyyy',
 						startDate:'0'
 					});
+
+					
 					
 					
 					$('#heurePicker').datetimepicker({
 						datepicker : false,
+						format:'H:i',
 						step : 15
 					});
 					
