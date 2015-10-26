@@ -72,7 +72,7 @@
 /* Important part */
 #myModal .modal-dialog, #myModal1 .modal-dialog {
 	overflow-y: initial !important;
-	width:60%;
+	width:900px;
 }
 
 .modal-body {

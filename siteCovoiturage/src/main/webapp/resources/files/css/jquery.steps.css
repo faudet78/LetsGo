@@ -45,7 +45,7 @@
 .wizard.vertical>.steps {
 	display: inline;
 	float: left;
-	width: 30%;
+	width: 25%;
 }
 
 .wizard>.steps .number {
@@ -53,7 +53,7 @@
 }
 
 .wizard>.steps>ul>li {
-	width: 33%;
+	width: 25%;
 }
 
 .wizard>.steps>ul>li, .wizard>.actions>ul>li {

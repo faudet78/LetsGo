@@ -39,8 +39,6 @@ public class Annonce implements Serializable {
 
 	private String heureDepart;
 
-	private int minDepart;
-
 	private int prix;
 
 	private String typeTrajet;
@@ -71,6 +69,8 @@ public class Annonce implements Serializable {
 
 	private String dateCreation;
 
+	private String model;
+
 	@ManyToOne
 	@JoinColumn(name = "id_user")
 	private User user;
@@ -79,19 +79,5 @@ public class Annonce implements Serializable {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	/*
-	 * public Annonce(String adresseDepart, String adresseArrivee, Long
-	 * placeProposees, boolean fumeurActive, String jourDepart, String
-	 * heureDepart, int minDepart, int prix, String typeTrajet, String vehicule,
-	 * String lieuDepart, String lieuArrivee, String details, User user) {
-	 * super(); this.adresseDepart = adresseDepart; this.adresseArrivee =
-	 * adresseArrivee; this.placeProposees = placeProposees; this.fumeurActive =
-	 * fumeurActive; this.jourDepart = jourDepart; this.heureDepart =
-	 * heureDepart; this.minDepart = minDepart; this.prix = prix; this.typeTrajet
-	 * = typeTrajet; this.vehicule = vehicule; this.lieuDepart = lieuDepart;
-	 * this.lieuArrivee = lieuArrivee; this.details = details; this.user = user;
-	 * }
-	 */
 
 }
