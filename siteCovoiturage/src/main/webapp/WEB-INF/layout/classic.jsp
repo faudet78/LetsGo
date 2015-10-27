@@ -148,13 +148,8 @@ popup
 			</div>
 			<div id='cssmenu'>
 				<ul>
-					<li><a href="<spring:url value="/annonces.html"></spring:url>"><span>Accueil</span></a></li>
-					<li class='active has-sub'><a href='#'><span>Assistance</span></a>
-						<ul>
-							<li class='has-sub'><a href='#'><span>Assistance1</span></a>
-							<li class='has-sub'><a href='#'><span>Assistance2</span></a>
-							</li>
-						</ul>
+					<li class="active"><a href="<spring:url value="/annonces.html"></spring:url>"><span>Accueil</span></a></li>
+					
 					<li><a
 						href="<spring:url value="/annonces/posterAnnonce.html"></spring:url>"><span>Publier
 								votre annonce</span></a></li>
