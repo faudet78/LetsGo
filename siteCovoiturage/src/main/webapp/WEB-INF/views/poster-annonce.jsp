@@ -338,7 +338,11 @@
 							<form:errors path="model"></form:errors>
 						</div>
 					</div>
-
+					<label>Terms and Conditions</label>
+					<input id="acceptTerms-2" name="acceptTerms" type="checkbox"
+						class="required"> <label for="acceptTerms-2">I
+						agree with the Terms and Conditions.</label>
+					<button type="submit" class="btn btn-lg">publier</button>
 
 				</div>
 
@@ -350,14 +354,14 @@
 
 
 
-			<h3>VALIDATION</h3>
+			<!-- <h3>VALIDATION</h3>
 			<fieldset>
 				<legend>Terms and Conditions</legend>
 				<input id="acceptTerms-2" name="acceptTerms" type="checkbox"
 					class="required"> <label for="acceptTerms-2">I
 					agree with the Terms and Conditions.</label>
 				<button type="submit" class="btn btn-lg">publier</button>
-			</fieldset>
+			</fieldset> -->
 		</form:form>
 	</div>
 </div>
@@ -410,7 +414,7 @@
 					return form.valid();
 				},
 				onFinished : function(event, currentIndex) {
-					form.submit();
+					return form.submit();
 					alert("Submitted!");
 				},
 				labels : {
