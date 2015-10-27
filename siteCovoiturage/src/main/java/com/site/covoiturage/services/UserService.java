@@ -32,6 +32,7 @@ public class UserService {
 		List<Role> roles = new ArrayList<Role>();
 
 		roles.add(roleRepository.findByName("ROLE_USER"));
+
 		user.setRoles(roles);
 		userRepository.save(user);
 

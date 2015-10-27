@@ -63,7 +63,8 @@
 	border-top-right-radius: 0;
 }
 
-//popup
+//
+popup
 .modal {
 	display: block !important;
 	/* I added this to see the modal, you don't need this */
@@ -72,7 +73,7 @@
 /* Important part */
 #myModal .modal-dialog, #myModal1 .modal-dialog {
 	overflow-y: initial !important;
-	width:900px;
+	width: 900px;
 }
 
 .modal-body {
@@ -81,54 +82,70 @@
 }
 </style>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/style2.css">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/style.css">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/style1.css">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/jquery.steps.css">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/jquery.datetimepicker.css">
-<link rel="stylesheet" type="text/css" href="../../resources/files/css/style.css">
-<link rel="stylesheet" type="text/css" href="../../resources/files/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/resources/css/style2.css">
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/resources/css/style.css">
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/resources/css/style1.css">
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/resources/css/jquery.steps.css">
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/resources/css/jquery.datetimepicker.css">
+<link rel="stylesheet" type="text/css"
+	href="../../resources/files/css/style.css">
+<link rel="stylesheet" type="text/css"
+	href="../../resources/files/css/bootstrap.min.css">
 <link rel="stylesheet" href="../../resources/files/css/style2.css">
 <link rel="stylesheet" href="../../resources/files/css/style1.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css"/>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
 
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.10.0/jquery.validate.js"></script>
-<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/jquery.steps.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/jquery.datetimepicker.full.min.js"></script>
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript"
+	src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.10.0/jquery.validate.js"></script>
+<script type="text/javascript"
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="<%=request.getContextPath()%>/resources/js/jquery.steps.js"></script>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript"
+	src="<%=request.getContextPath()%>/resources/js/jquery.datetimepicker.full.min.js"></script>
 
 <title><tiles:getAsString name="title"></tiles:getAsString></title>
 </head>
 <body>
 	<div class="container">
 		<div class="panel panel-default">
-			<div class="panel-heading"><security:authorize
-					access="!isAuthenticated()"
-				>
+			<div class="panel-heading">
+				<security:authorize access="!isAuthenticated()">
 					<h5 class="pull-right">
 						<a style="color: black;"
-							href="<spring:url value="/annonces/login.html"></spring:url>"
-						><span class="glyphicon glyphicon-log-in"></span> Connexion</a> | <a
+							href="<spring:url value="/annonces/login.html"></spring:url>"><span
+							class="glyphicon glyphicon-log-in"></span> Connexion</a> | <a
 							style="color: black;"
-							href="<spring:url value="/annonces/inscription.html"></spring:url>"
-						><span class="glyphicon glyphicon-registration-mark"></span>
-							Inscription</a>
+							href="<spring:url value="/annonces/inscription.html"></spring:url>"><span
+							class="glyphicon glyphicon-registration-mark"></span> Inscription</a>
 					</h5>
-				</security:authorize> <security:authorize access="isAuthenticated()">
+				</security:authorize>
+				<security:authorize access="isAuthenticated()">
 					<h5 class="pull-right">
 						<a style="color: black;" href="#"><span class="glyphicon "></span>
 							Bonjour ${user } </a> | <a style="color: black;"
-							href="<spring:url value="/logout"></spring:url>"
-						><span class="glyphicon glyphicon-log-out"></span> Se
-							deconnecter</a>
+							href="<spring:url value="/logout"></spring:url>"><span
+							class="glyphicon glyphicon-log-out"></span> Se deconnecter</a>
 					</h5>
-				</security:authorize> <br></div>
-			<div class=""><a href="#"><img alt=""
-					src="<%=request.getContextPath()%>/resources/images/banniere.gif"
-				></a></div>
+				</security:authorize>
+				<br>
+			</div>
+			<div class="">
+				<a href="#"><img alt=""
+					src="<%=request.getContextPath()%>/resources/images/banniere.gif"></a>
+			</div>
 			<div id='cssmenu'>
 				<ul>
 					<li><a href="<spring:url value="/annonces.html"></spring:url>"><span>Accueil</span></a></li>
@@ -139,17 +156,29 @@
 							</li>
 						</ul>
 					<li><a
-						href="<spring:url value="/annonces/posterAnnonce.html"></spring:url>"
-					><span>Publier votre annonce</span></a></li>
+						href="<spring:url value="/annonces/posterAnnonce.html"></spring:url>"><span>Publier
+								votre annonce</span></a></li>
 				</ul>
-		</div> <!--Formulaire de connexion  --> <tiles:insertAttribute name="body"></tiles:insertAttribute>
-			<div class="footer  col-sm-12 panel-footer"><tiles:insertAttribute
-					name="footer"
-				></tiles:insertAttribute></div>
-	</div>
+			</div>
+			<!--Formulaire de connexion  -->
+			<tiles:insertAttribute name="body"></tiles:insertAttribute>
+			<div class="footer  col-sm-12 panel-footer">
+				<tiles:insertAttribute name="footer"></tiles:insertAttribute>
+			</div>
+		</div>
 	</div>
 	<script type="text/javascript">
 		$(document).ready(
+				function initialize() {
+
+					 var options = {
+					  types: ['(cities)'],
+					  componentRestrictions: {country: "fr"}
+					 };
+
+					 var input = document.getElementById('ville');
+					 var autocomplete = new google.maps.places.Autocomplete(input, options);
+					},
 				function() {
 					$(window).load(function() {
 						$('#myModal').modal('show');
@@ -180,18 +209,15 @@
 
 					$('#datePicker').datepicker({
 						format : 'dd/mm/yyyy',
-						startDate:'0'
+						startDate : '0'
 					});
 
-					
-					
-					
 					$('#heurePicker').datetimepicker({
 						datepicker : false,
-						format:'H:i',
+						format : 'H:i',
 						step : 15
 					});
-					
+
 				});
 		$('.registrationForm')
 				.validate(
@@ -277,7 +303,7 @@
 									equalTo : "Les mots de passes ne correspondent pas!"
 								}
 
-							}
+							},
 						});
 	</script>
 </body>

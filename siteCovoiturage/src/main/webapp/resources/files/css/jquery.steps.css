@@ -53,7 +53,7 @@ Accessibility
 }
 
 .wizard>.steps>ul>li {
-	width: 25%;
+	width: 33.3%;
 }
 
 .wizard>.steps>ul>li, .wizard>.actions>ul>li {
@@ -103,7 +103,7 @@ Accessibility
 }
 
 .wizard>.content {
-	   background: #eee;
+	   background: #FAF0E6;
 	display: block;
 	margin: 0.5em;
 	min-height: 42em;
