@@ -12,7 +12,7 @@
 		<security:access-denied-handler
 			error-page="/annonces/403page" />
 		<security:intercept-url pattern="/annonces/posterAnnonce**"
-			access="hasRole('ROLE_ADMIN')" />
+			access="hasRole('ROLE_USER')" />
 		<!-- <security:intercept-url pattern="/login*" access="hasRole('ROLE_ADMIN')" 
 			/> -->
 	</security:http>
