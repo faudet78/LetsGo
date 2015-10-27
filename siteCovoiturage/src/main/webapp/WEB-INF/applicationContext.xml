@@ -48,7 +48,9 @@
 	<jpa:repositories base-package="com.site.covoiturage.repositories"></jpa:repositories>
 	<import resource="security.xml" />
 	<tx:annotation-driven />
-	<!-- <mvc:resources location="/resources/files/" mapping="/resources/**" 
-		/> -->
 	<mvc:resources location="/resources/files/" mapping="/resources/**" />
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="100000"></property>
+	</bean>
 </beans>

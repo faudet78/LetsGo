@@ -1,13 +1,22 @@
 package com.site.covoiturage.controllers;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.security.Principal;
 
 import javax.validation.Valid;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -24,9 +34,6 @@ import com.site.covoiturage.model.Annonce;
 import com.site.covoiturage.model.User;
 import com.site.covoiturage.services.AnnonceService;
 import com.site.covoiturage.services.UserService;
-
-import lombok.Getter;
-import lombok.Setter;
 
 @Controller
 @Getter
@@ -158,12 +165,20 @@ public class CovoiturageController {
 	// Methode de l'ajout de d'une annonce
 	@RequestMapping(method = RequestMethod.POST, value = "/posterAnnonce")
 	public String saveAnnonce(@Valid @ModelAttribute("annonce") Annonce annonce, BindingResult result,
-			RedirectAttributes redirectAttributes, Principal principal, Model model) {
+			RedirectAttributes redirectAttributes, Principal principal, Model model, MultipartFile file)
+			throws IOException {
 
 		if (result.hasErrors()) {
 			return "poster-annonce";
 		}
+
 		String username = principal.getName();
+		if (!file.isEmpty()) {
+			String path = System.getProperty("java.io.tmpdir");
+			Long idP = annonceService.save(annonce, username);
+			annonce.setPhoto(file.getOriginalFilename());
+			file.transferTo(new File(path + "/PROD_" + idP + "_" + file.getOriginalFilename()));
+		}
 		annonceService.save(annonce, username);
 		redirectAttributes.addFlashAttribute("success", true);
 		return "redirect:/posterAnnonce.html";
@@ -188,4 +203,11 @@ public class CovoiturageController {
 		return "redirect:login?denied";
 	}
 
+	@RequestMapping(value = "/photoAnnonce", produces = MediaType.IMAGE_JPEG_VALUE)
+	@ResponseBody
+	public byte[] photoProd(Long idAnnonce) throws FileNotFoundException, IOException {
+		Annonce annonce = annonceService.findByid(idAnnonce);
+		File file = new File(System.getProperty("java.io.tmpdir") + "/PROD_" + idAnnonce + "_" + annonce.getPhoto());
+		return IOUtils.toByteArray(new FileInputStream(file));
+	}
 }

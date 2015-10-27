@@ -12,6 +12,7 @@
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/resources/js/jquery.placepicker.js"></script>
 
+
 <div class="">
 	<div class="panel-heading"
 		style="background-color: #d9edf7; border-color: #ddd;">
@@ -22,6 +23,7 @@
 	</div>
 	<div class="panel-body">
 		<form:form id="annonceForm" modelAttribute="annonce"
+			enctype="multipart/form-data"
 			cssClass="form-horizontal registrationForm">
 			<c:if test="${success eq true }">
 				<div class="alert alert-success">
@@ -312,30 +314,34 @@
 						</div>
 					</div>
 					<div class="form-group ">
-						<label for="animauxActive"
+						<label for="fumeurActive"
 							class="control-label col-sm-3 col-sm-offset-2">Autorisation
 							de fumer?<strong style="color: red"> *</strong>
 						</label>
 						<div class="col-sm-2 ">
-							<form:errors path="animauxActive"></form:errors>
+							<form:errors path="fumeurActive"></form:errors>
 							<label class="radio-inline"><form:radiobutton
-									path="animauxActive" value="0" /> Non </label> <label
+									path="fumeurActive" value="0" /> Non </label> <label
 								class="radio-inline"> <form:radiobutton
-									path="animauxActive" value="1" /> Oui
+									path="fumeurActive" value="1" /> Oui
 							</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="model" class="control-label col-sm-3 col-sm-offset-2">Télécharger
+							une photo<strong style="color: red"> *</strong>
+						</label>
+						<div class="col-sm-3 has-feedback">
+							<input type="file" value="photo" data-toggle="tooltip"
+								name="file" data-placement="right"
+								title="Télécharger une photo, pour donner plus de précisions à vos passagers">
+							<form:errors path="model"></form:errors>
 						</div>
 					</div>
 
 
-
-
-
-
-
-
-
-
 				</div>
+
 			</fieldset>
 
 
@@ -360,23 +366,6 @@
 	$(document).ready(function() {
 		$(".placepicker").placepicker();
 		$('[data-toggle="tooltip"]').tooltip();
-
-		$("#parent1").css("display", "none");
-		$("#test1").css("display", "none");
-		$(".aboveage1").click(function() {
-			if ($('input[name=age1]:checked').val() == "No") {
-				$("#parent1").slideDown("slow").fadeIn("slow"); //Slide Down Effect
-				$("#test1").slideUp("slow").fadeOut("slow"); //Slide Up Effect
-			} else if ($('input[name=age1]:checked').val() == "Depends") {
-				$("#test1").slideDown("slow").fadeIn("slow"); //Slide Up Effect
-				$("#parent1").slideUp("slow").fadeOut("slow"); //Slide Down Effect
-			}
-
-			else {
-				$("#parent1").slideUp("slow"); //Slide Up Effect
-				$("#test1").slideUp("slow"); //Slide Up Effect
-			}
-		});
 	});
 
 	var form = $("#annonceForm").show();
@@ -421,8 +410,19 @@
 					return form.valid();
 				},
 				onFinished : function(event, currentIndex) {
+					form.submit();
 					alert("Submitted!");
+				},
+				labels : {
+					cancel : "Cancel",
+					current : "current step:",
+					pagination : "Pagination",
+					finish : "Publier",
+					next : "Suivant",
+					previous : "Précédent",
+					loading : "Loading ..."
 				}
+
 			}).validate({
 		errorPlacement : function errorPlacement(error, element) {
 			element.before(error);

@@ -34,12 +34,13 @@ public class AnnonceService {
 		return annonceRepository.findAll(p);
 	}
 
-	public void save(Annonce annonce, String username) {
+	public Long save(Annonce annonce, String username) {
 		User user = userRepository.findByUsername(username);
 		annonce.setUser(user);
 		annonce.setDateCreation(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
 		annonce.setPlaceDisponible(annonce.getPlaceProposees());
 		annonceRepository.save(annonce);
+		return user.getId();
 	}
 
 	public Annonce findByid(Long id) {
