@@ -1,6 +1,6 @@
-/*
+
     Common 
-*/
+
 .wizard, .tabcontrol {
 	display: block;
 	width: 100%;
@@ -22,7 +22,7 @@
 	padding: 0;
 }
 
-/* Accessibility */
+Accessibility
 .wizard>.steps .current-info, .tabcontrol>.steps .current-info {
 	position: absolute;
 	left: -999em;
@@ -33,9 +33,9 @@
 	left: -999em;
 }
 
-/*
+
     Wizard
-*/
+
 .wizard>.steps {
 	position: relative;
 	display: block;
@@ -103,11 +103,11 @@
 }
 
 .wizard>.content {
-	/*    background: #eee; */
+	   background: #eee;
 	display: block;
 	margin: 0.5em;
 	min-height: 42em;
-	/*   overflow: hidden; */
+	  overflow: hidden;
 	position: relative;
 	width: auto;
 	-webkit-border-radius: 5px;
@@ -223,9 +223,9 @@
 	
 }
 
-/*
+
     Tabcontrol
-*/
+
 .tabcontrol>.steps {
 	position: relative;
 	display: block;
@@ -305,5 +305,5 @@
 }
 
 .tabcontrol>.content>.body ul>li {
-	display: list-item;
+	display: list-item; 
 }

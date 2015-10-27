@@ -338,30 +338,15 @@
 							<form:errors path="model"></form:errors>
 						</div>
 					</div>
-					<label>Terms and Conditions</label>
-					<input id="acceptTerms-2" name="acceptTerms" type="checkbox"
-						class="required"> <label for="acceptTerms-2">I
-						agree with the Terms and Conditions.</label>
-					<button type="submit" class="btn btn-lg">publier</button>
-
+					<!-- <div class="form-group ">
+						<input id="acceptTerms-2" name="acceptTerms" class="form-control"  type="checkbox"
+							class="required  col-sm-offset-3 "> <label for="acceptTerms-2">Je
+							suis d'accord avec les Termes et Conditions.</label>
+					</div> -->
 				</div>
 
 			</fieldset>
 
-
-
-
-
-
-
-			<!-- <h3>VALIDATION</h3>
-			<fieldset>
-				<legend>Terms and Conditions</legend>
-				<input id="acceptTerms-2" name="acceptTerms" type="checkbox"
-					class="required"> <label for="acceptTerms-2">I
-					agree with the Terms and Conditions.</label>
-				<button type="submit" class="btn btn-lg">publier</button>
-			</fieldset> -->
 		</form:form>
 	</div>
 </div>
@@ -419,7 +404,7 @@
 				},
 				labels : {
 					cancel : "Cancel",
-					current : "current step:",
+					current : "",
 					pagination : "Pagination",
 					finish : "Publier",
 					next : "Suivant",
