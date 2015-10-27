@@ -169,17 +169,22 @@ popup
 	</div>
 	<script type="text/javascript">
 		$(document).ready(
-				function initialize() {
-
-					 var options = {
-					  types: ['(cities)'],
-					  componentRestrictions: {country: "fr"}
-					 };
-
-					 var input = document.getElementById('ville');
-					 var autocomplete = new google.maps.places.Autocomplete(input, options);
-					},
+				
 				function() {
+					function initialize() {
+
+						 var options = {
+						  types: ['(cities)'],
+						  componentRestrictions: {country: "fr"}
+						 };
+
+						 var input = document.getElementById('ville');
+						 var autocomplete = new google.maps.places.Autocomplete(input, options);
+						}
+
+
+
+					
 					$(window).load(function() {
 						$('#myModal').modal('show');
 					});
