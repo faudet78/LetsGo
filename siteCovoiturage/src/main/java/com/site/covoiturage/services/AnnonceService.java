@@ -37,6 +37,7 @@ public class AnnonceService {
 	public Long save(Annonce annonce, String username) {
 		User user = userRepository.findByUsername(username);
 		annonce.setUser(user);
+		annonce.setTypeTrajet("Allee simple");
 		annonce.setDateCreation(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
 		annonce.setPlaceDisponible(annonce.getPlaceProposees());
 		annonceRepository.save(annonce);

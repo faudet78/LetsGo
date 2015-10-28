@@ -170,14 +170,11 @@
 						</table>
 						<table class="table">
 							<tr>
-								<c:if test="${annonce.typeTrajet=='Allee simple' }">
+								<c:if test="${!empty annonce.typeTrajet }">
 									<td><img alt=""
 										src="<%=request.getContextPath()%>/resources/images/trajet-aller.png"></td>
 								</c:if>
-								<c:if test="${annonce.typeTrajet=='Allee retour' }">
-									<td><img alt=""
-										src="<%=request.getContextPath()%>/resources/images/aller-retour.png"></td>
-								</c:if>
+
 								<c:if test="${annonce.musicActive==true }">
 									<td><img alt=""
 										src="<%=request.getContextPath()%>/resources/images/msic.jpg"
@@ -331,9 +328,9 @@
 							<td style="color: gray;"><h5>Par passager</h5></td>
 							<td style="color: gray;"><c:if
 									test="${annonce.placeDisponible=='1' }">
-									<h5>${annonce.placeDisponible }proposée</h5>
+									<h5>${annonce.placeDisponible } proposée</h5>
 								</c:if> <c:if test="${annonce.placeDisponible>'1' }">
-									<h5>${annonce.placeDisponible }proposées</h5>
+									<h5>${annonce.placeDisponible } proposées</h5>
 								</c:if></td>
 						</tr>
 					</table>
@@ -358,9 +355,13 @@
 									</c:otherwise>
 								</c:choose>
 							</div>
-							<div class="thumbnail panel panel-info">
-								<p>${annonce.user.commentaire }</p>
-							</div>
+
+							<c:if test="${!empty annonce.user.commentaire  }">
+								<div class="thumbnail panel panel-info">
+									<p>${annonce.user.commentaire }</p>
+								</div>
+							</c:if>
+
 							<div class="push-right">
 								<a data-toggle="modal" data-target="#profil">Voir le profil
 									complet</a>

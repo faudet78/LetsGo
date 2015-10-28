@@ -166,34 +166,6 @@ popup
 	<script type="text/javascript">
 		$(document).ready(
 				function() {
-
-					$(window).load(function() {
-						$('#myModal').modal('show');
-					});
-					$(window).load(function() {
-						$('#myModal1').modal('show');
-					});
-
-					//autocompletion cities by country : France(fr) in this case
-					var options = {
-						types : [ '(cities)' ],
-						componentRestrictions : {
-							country : "fr"
-						}
-					};
-					
-
-					var input = document.getElementById('ville');
-					var autocomplete = new google.maps.places.Autocomplete(
-							input, options);
-					var input1 = document.getElementById('ville1');
-					var autocomplete1 = new google.maps.places.Autocomplete(
-							input1, options);
-
-				
-
-					
-
 					$('.field input').keyup(
 							function() {
 
@@ -203,7 +175,6 @@ popup
 										empty = true;
 									}
 								});
-
 								if (empty) {
 									$('.actions button').attr('disabled',
 											'disabled');
@@ -213,11 +184,31 @@ popup
 													'title', '');
 								}
 							});
+					$(window).load(function() {
+						$('#myModal').modal('show');
+					});
+					$(window).load(function() {
+						$('#myModal1').modal('show');
+					});
+					//autocompletion cities by country : France(fr) in this case
+					var options = {
+						types : [ '(cities)' ],
+						componentRestrictions : {
+							country : "fr"
+						}
+					};
 
 					$('#datePicker').datepicker({
 						format : 'dd/mm/yyyy',
 						startDate : '0'
 					});
+
+					var input = document.getElementById('ville');
+					var autocomplete = new google.maps.places.Autocomplete(
+							input, options);
+					var input1 = document.getElementById('ville1');
+					var autocomplete1 = new google.maps.places.Autocomplete(
+							input1, options);
 
 					$('#heurePicker').datetimepicker({
 						datepicker : false,

@@ -119,15 +119,15 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="lieuDArrivee"
+						<label for="lieuArrivee"
 							class="control-label col-sm-3 col-sm-offset-2">Lieu
 							d'arrivée</label>
 						<div class="col-sm-3">
-							<form:input path="lieuDepart" cssClass="form-control placepicker"
+							<form:input path="lieuArrivee" cssClass="form-control placepicker"
 								placeholder="Lieu d'arrivée" data-toggle="tooltip"
 								data-placement="right"
 								title="Indiquer un lieu d'arrivée, pour donner plus de précisions à vos passagers" />
-							<form:errors path="lieuDepart"></form:errors>
+							<form:errors path="lieuArrivee"></form:errors>
 						</div>
 					</div>
 				</div>

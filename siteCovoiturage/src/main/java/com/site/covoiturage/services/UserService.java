@@ -1,6 +1,8 @@
 package com.site.covoiturage.services;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -34,6 +36,7 @@ public class UserService {
 		roles.add(roleRepository.findByName("ROLE_USER"));
 
 		user.setRoles(roles);
+		user.setDateInscription(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
 		userRepository.save(user);
 
 	}
