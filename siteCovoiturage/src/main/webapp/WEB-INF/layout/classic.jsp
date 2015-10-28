@@ -148,8 +148,9 @@ popup
 			</div>
 			<div id='cssmenu'>
 				<ul>
-					<li class="active"><a href="<spring:url value="/annonces.html"></spring:url>"><span>Accueil</span></a></li>
-					
+					<li class="active"><a
+						href="<spring:url value="/annonces.html"></spring:url>"><span>Accueil</span></a></li>
+
 					<li><a
 						href="<spring:url value="/annonces/posterAnnonce.html"></spring:url>"><span>Publier
 								votre annonce</span></a></li>
@@ -164,28 +165,34 @@ popup
 	</div>
 	<script type="text/javascript">
 		$(document).ready(
-				
 				function() {
-					function initialize() {
 
-						 var options = {
-						  types: ['(cities)'],
-						  componentRestrictions: {country: "fr"}
-						 };
-
-						 var input = document.getElementById('ville');
-						 var autocomplete = new google.maps.places.Autocomplete(input, options);
-						}
-
-
-
-					
 					$(window).load(function() {
 						$('#myModal').modal('show');
 					});
 					$(window).load(function() {
 						$('#myModal1').modal('show');
 					});
+
+					//autocompletion cities by country : France(fr) in this case
+					var options = {
+						types : [ '(cities)' ],
+						componentRestrictions : {
+							country : "fr"
+						}
+					};
+					
+
+					var input = document.getElementById('ville');
+					var autocomplete = new google.maps.places.Autocomplete(
+							input, options);
+					var input1 = document.getElementById('ville1');
+					var autocomplete1 = new google.maps.places.Autocomplete(
+							input1, options);
+
+				
+
+					
 
 					$('.field input').keyup(
 							function() {

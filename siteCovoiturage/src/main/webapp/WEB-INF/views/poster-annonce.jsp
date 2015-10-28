@@ -22,15 +22,15 @@
 			covoiturage</h5>
 	</div>
 	<div class="panel-body">
-	<c:if test="${success eq true }">
-				<div class="alert alert-success">
-					<h4 align="center">Votre annonce a été créée avec succès</h4>
-				</div>
-			</c:if>
+		<c:if test="${success eq true }">
+			<div class="alert alert-success">
+				<h4 align="center">Votre annonce a été créée avec succès</h4>
+			</div>
+		</c:if>
 		<form:form id="annonceForm" modelAttribute="annonce"
 			enctype="multipart/form-data"
 			cssClass="form-horizontal registrationForm">
-			
+
 			<h3>TRAJET</h3>
 			<fieldset>
 				<h5>
@@ -44,13 +44,13 @@
 							départ <strong style="color: red">*</strong>
 						</label>
 						<div class="col-sm-3 has-feedback">
-							<input id="ville" type="text" size="50" value="${adresseDepart }"
-								placeholder="Exemple : Paris" autocomplete="on" data-toggle="tooltip"
-								data-placement="right"
+							<form:input path="adresseDepart" id="ville" type="text" size="50"
+								placeholder="Exemple : Paris" autocomplete="on"
+								data-toggle="tooltip" data-placement="right"
 								title="Indiquer une ville de départ, pour donner plus de précisions à vos passagers"
-								class="form-control placepicker"> <i class="form-control-feedback">
-								<img width="20" style="margin-top: 7px;" height="20"
-								alt="search"
+								cssClass="form-control" />
+							<i class="form-control-feedback"> <img width="20"
+								style="margin-top: 7px;" height="20" alt="search"
 								src="<%=request.getContextPath()%>/resources/images/map-marker-green.png">
 							</i>
 							<form:errors path="adresseDepart"></form:errors>
@@ -61,7 +61,7 @@
 							class="control-label col-sm-3 col-sm-offset-2">Lieu de
 							départ</label>
 						<div class="col-sm-3">
-							<form:input path="lieuDepart" cssClass="form-control"
+							<form:input path="lieuDepart" cssClass="form-control placepicker" 
 								placeholder="Lieu de départ" data-toggle="tooltip"
 								data-placement="right"
 								title="Indiquer un lieu de départ, pour donner plus de précisions à vos passagers" />
@@ -106,12 +106,11 @@
 						</label>
 						<div class="col-sm-3">
 
-							<input id="ville" type="text" size="50"
-								value="${adresseArrivee }" placeholder="Exemple : Marseille"
-								autocomplete="on" class="form-control" data-toggle="tooltip"
+							<form:input path="adresseArrivee" type="text" id="ville1"
+								size="50" placeholder="Exemple : Marseille" autocomplete="on"
+								cssClass="form-control " data-toggle="tooltip"
 								data-placement="right"
-								title="Indiquer une ville d'arrivée, pour donner plus de précisions à vos passagers"
-								placeholder="Exemple : Marseille">
+								title="Indiquer une ville d'arrivée, pour donner plus de précisions à vos passagers" />
 							<i class="form-control-feedback"> <img width="20"
 								style="margin-top: 7px;" height="20" alt="search"
 								src="<%=request.getContextPath()%>/resources/images/map-marker-red.png">
@@ -124,7 +123,7 @@
 							class="control-label col-sm-3 col-sm-offset-2">Lieu
 							d'arrivée</label>
 						<div class="col-sm-3">
-							<form:input path="lieuDepart" cssClass="form-control"
+							<form:input path="lieuDepart" cssClass="form-control placepicker"
 								placeholder="Lieu d'arrivée" data-toggle="tooltip"
 								data-placement="right"
 								title="Indiquer un lieu d'arrivée, pour donner plus de précisions à vos passagers" />
