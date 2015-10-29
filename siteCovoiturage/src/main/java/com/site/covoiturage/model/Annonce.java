@@ -39,8 +39,6 @@ public class Annonce implements Serializable {
 
 	private String heureDepart;
 
-	private int prix;
-
 	private String typeTrajet;
 
 	private String vehicule;
@@ -51,11 +49,17 @@ public class Annonce implements Serializable {
 
 	private String details;
 
+	private String photo;
+
+	private String dateCreation;
+
+	private String model;
+
 	private boolean animauxActive;
 
 	private boolean musicActive;
 
-	private String photo;
+	private boolean climatisation;
 
 	private boolean hasMusic;
 
@@ -63,13 +67,11 @@ public class Annonce implements Serializable {
 
 	private int nbrePersonnes;
 
+	private int prix;
+
 	private int nbreSacs;
 
-	private boolean climatisation;
-
-	private String dateCreation;
-
-	private String model;
+	private EAnnonceStatut statut;
 
 	@ManyToOne
 	@JoinColumn(name = "id_user")
@@ -77,7 +79,6 @@ public class Annonce implements Serializable {
 
 	public Annonce() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Annonce(String adresseDepart, String adresseArrivee, Long placeDisponible, Long placeProposees,
