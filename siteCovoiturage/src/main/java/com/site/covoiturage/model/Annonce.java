@@ -80,4 +80,36 @@ public class Annonce implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Annonce(String adresseDepart, String adresseArrivee, Long placeDisponible, Long placeProposees,
+			boolean fumeurActive, String jourDepart, String heureDepart, int prix, String typeTrajet, String vehicule,
+			String lieuDepart, String lieuArrivee, String details, boolean animauxActive, boolean musicActive,
+			String photo, boolean hasMusic, int nbrePortes, int nbrePersonnes, int nbreSacs, boolean climatisation,
+			String dateCreation, String model, User user) {
+		super();
+		this.adresseDepart = adresseDepart;
+		this.adresseArrivee = adresseArrivee;
+		this.placeDisponible = placeDisponible;
+		this.placeProposees = placeProposees;
+		this.fumeurActive = fumeurActive;
+		this.jourDepart = jourDepart;
+		this.heureDepart = heureDepart;
+		this.prix = prix;
+		this.typeTrajet = typeTrajet;
+		this.vehicule = vehicule;
+		this.lieuDepart = lieuDepart;
+		this.lieuArrivee = lieuArrivee;
+		this.details = details;
+		this.animauxActive = animauxActive;
+		this.musicActive = musicActive;
+		this.photo = photo;
+		this.hasMusic = hasMusic;
+		this.nbrePortes = nbrePortes;
+		this.nbrePersonnes = nbrePersonnes;
+		this.nbreSacs = nbreSacs;
+		this.climatisation = climatisation;
+		this.dateCreation = dateCreation;
+		this.model = model;
+		this.user = user;
+	}
+
 }

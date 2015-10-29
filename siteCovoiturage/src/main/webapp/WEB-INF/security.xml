@@ -30,7 +30,7 @@
 
 											   where user.username = ?"
 				users-by-username-query="select username,password,active from user where username = ?" />
-			<!-- <security:password-encoder hash="bcrypt"> </security:password-encoder> -->
+			<security:password-encoder hash="bcrypt"> </security:password-encoder>
 		</security:authentication-provider>
 	</security:authentication-manager>
 	<security:global-method-security

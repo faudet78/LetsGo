@@ -233,12 +233,7 @@ s.html?page=${current + 1 }"></spring:url>'
 								</nav>
 							</c:if></div>
 					</c:when>
-					<c:otherwise>
-						<div class="red " style="margin-bottom: 30px;">
-							<h3 align="center" style="margin-top: 20px; margin-bottom: 20px;">Desole,
-								Aucun trajet n'a ete trouve!</h3> <br> <br>
-						</div>
-					</c:otherwise>
+					
 				</c:choose>
 			</ul>
 	</div>

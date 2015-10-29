@@ -8,6 +8,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.site.covoiturage.model.Role;
@@ -27,10 +28,10 @@ public class UserService {
 
 	public void save(User user) {
 		user.setActive(true);
-		/*
-		 * BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		 * user.setPassword( encoder.encode( user.getPassword() ) );
-		 */
+
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		user.setPassword(encoder.encode(user.getPassword()));
+
 		List<Role> roles = new ArrayList<Role>();
 
 		roles.add(roleRepository.findByName("ROLE_USER"));
