@@ -156,7 +156,7 @@ popup
 								votre annonce</span></a></li>
 				</ul>
 			</div>
-			<!--Formulaire de connexion  -->
+
 			<tiles:insertAttribute name="body"></tiles:insertAttribute>
 			<div class="footer  col-sm-12 panel-footer">
 				<tiles:insertAttribute name="footer"></tiles:insertAttribute>
@@ -166,6 +166,42 @@ popup
 	<script type="text/javascript">
 		$(document).ready(
 				function() {
+					$(window).load(function() {
+						$('#myModal').modal('show');
+					});
+					$(window).load(function() {
+						$('#myModal1').modal('show');
+					});
+					$('#dateRangePicker').datepicker({
+						format : 'dd/mm/yyyy',
+						startDate : '01/01/2010',
+						endDate : '12/30/2020'
+					})
+					$('#datePicker').datepicker({
+						format : 'dd/mm/yyyy',
+						startDate : '0'
+					})
+
+					//autocompletion cities by country : France(fr) in this case
+					var options = {
+						types : [ '(cities)' ],
+						componentRestrictions : {
+							country : "fr"
+						}
+					}
+					var input = document.getElementById('ville');
+					var autocomplete = new google.maps.places.Autocomplete(
+							input, options);
+					var input1 = document.getElementById('ville1');
+					var autocomplete1 = new google.maps.places.Autocomplete(
+							input1, options)
+
+					
+					$('#heurePicker').datetimepicker({
+						datepicker : false,
+						format : 'H:i',
+						step : 15
+					})
 					$('.field input').keyup(
 							function() {
 
@@ -174,7 +210,8 @@ popup
 									if ($(this).val().length == 0) {
 										empty = true;
 									}
-								});
+								})
+
 								if (empty) {
 									$('.actions button').attr('disabled',
 											'disabled');
@@ -183,40 +220,9 @@ popup
 											.attr('disabled', false).attr(
 													'title', '');
 								}
-							});
-					$(window).load(function() {
-						$('#myModal').modal('show');
-					});
-					$(window).load(function() {
-						$('#myModal1').modal('show');
-					});
-					//autocompletion cities by country : France(fr) in this case
-					var options = {
-						types : [ '(cities)' ],
-						componentRestrictions : {
-							country : "fr"
-						}
-					};
+							})
 
-					$('#datePicker').datepicker({
-						format : 'dd/mm/yyyy',
-						startDate : '0'
-					});
-
-					var input = document.getElementById('ville');
-					var autocomplete = new google.maps.places.Autocomplete(
-							input, options);
-					var input1 = document.getElementById('ville1');
-					var autocomplete1 = new google.maps.places.Autocomplete(
-							input1, options);
-
-					$('#heurePicker').datetimepicker({
-						datepicker : false,
-						format : 'H:i',
-						step : 15
-					});
-
-				});
+				})
 		$('.registrationForm')
 				.validate(
 						{
@@ -301,8 +307,12 @@ popup
 									equalTo : "Les mots de passes ne correspondent pas!"
 								}
 
-							},
+							}
 						});
+		//remove div message apres la creation de l'annonce
+		function removeDiv(divId) {
+			$("#" + divId).remove();
+		};
 	</script>
 </body>
 </html>

@@ -22,11 +22,6 @@
 			covoiturage</h5>
 	</div>
 	<div class="panel-body">
-		<c:if test="${success eq true }">
-			<div class="alert alert-success">
-				<h4 align="center">Votre annonce a été créée avec succès</h4>
-			</div>
-		</c:if>
 		<form:form id="annonceForm" modelAttribute="annonce"
 			enctype="multipart/form-data"
 			cssClass="form-horizontal registrationForm">

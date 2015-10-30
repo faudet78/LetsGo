@@ -49,7 +49,8 @@ public class CovoiturageController {
 
 	// Charger la page d'annonces
 	@RequestMapping
-	public String getAnnonces(Model model, @PageableDefault(size = 5) Pageable pager, Principal principal) {
+	public String getAnnonces(Model model, @PageableDefault(size = 5) Pageable pager, Principal principal,
+			@ModelAttribute("message") String message) {
 		if (principal != null) {
 			String user = principal.getName();
 			model.addAttribute("user", user);
@@ -61,6 +62,7 @@ public class CovoiturageController {
 		model.addAttribute("maxPages", nbrePages);
 		Integer current = pager.getPageNumber();
 		model.addAttribute("current", current);
+		model.addAttribute(message);
 
 		return "annonces";
 	}
@@ -180,8 +182,9 @@ public class CovoiturageController {
 			file.transferTo(new File(path + "/PROD_" + idP + "_" + file.getOriginalFilename()));
 		}
 		annonceService.save(annonce, username);
-		redirectAttributes.addFlashAttribute("success", true);
-		return "redirect:/posterAnnonce.html";
+		redirectAttributes.addFlashAttribute("message", "Votre annonce a été créée avec succès!");
+		return "redirect:/annonces.html";
+
 	}
 
 	@RequestMapping("/login")
