@@ -44,32 +44,32 @@
 				<form
 					action='<spring:url value="/annonces/chercherAnnonce "></spring:url>'
 					class="form-inline">
-					<div class="form-group has-feedback field">
+					<div class="form-group has-feedback ">
 						<input type="text" class="form-control"
 							placeholder="Adresse de départ" value="${adresseD }"
-							id="adresseD" name="adresseD" /> <i
+							id="adresseDepart" name="adresseD" /> <i
 							class="form-control-feedback "><img width="20"
 							style="margin-top: 7px;" height="20" alt="search"
 							src="<%=request.getContextPath()%>/resources/images/map-marker-green.png"></i>
 					</div>
 					<span style="margin-left: 5px; margin-right: 5px;"
 						class="glyphicon glyphicon-arrow-right"></span>
-					<div class="form-group has-feedback field">
-						<input type="text" class="form-control" id="adresseA"
+					<div class="form-group has-feedback ">
+						<input type="text" class="form-control" id="adresseArrivee"
 							placeholder="Adresse d'arrivée" value="${adresseA }"
 							name="adresseA" /> <i class="form-control-feedback "><img
 							width="20" style="margin-top: 7px;" height="20" alt="search"
 							src="<%=request.getContextPath()%>/resources/images/map-marker-red.png"></i>
 					</div>
-					<div class="form-group date input-group input-append date field "
+					<div class="form-group date input-group input-append date "
 						id="datePicker">
-						<input type="text" class="form-control" name="jourDepart"
+						<input type="text" class="form-control" name="jourDepart" id="jourDepart"
 							value="${jourDepart }" placeholder="Date de départ" /> <span
 							class="input-group-addon add-on"><span
 							class="glyphicon glyphicon-calendar "></span></span>
 					</div>
-					<div class="actions form-group">
-						<button type="submit" class="btn btn-large btn-success"
+					<div class=" form-group">
+						<button type="submit" class="btn btn-large btn-success" id="sbtbtn"
 							title="Saisissez les adresses">
 							<span class="glyphicon glyphicon-chevron-right"></span> Chercher
 						</button>
@@ -138,7 +138,7 @@ s.html?page=${current + 1 }"></spring:url>'><span
 									</div>
 								</div>
 								<div class="col-sm-5 col-sm-offset-2 ">
-									<div class="row" align="left">
+									<div class="row " align="left">
 										<h3 class="time light-gray">${annonce.jourDepart }</h3>
 										<h3 class="fromto">
 											<span class="trip-roads-stop text-uppercase ">${annonce.adresseDepart }</span>

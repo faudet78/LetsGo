@@ -56,7 +56,7 @@
 							class="control-label col-sm-3 col-sm-offset-2">Lieu de
 							départ</label>
 						<div class="col-sm-3">
-							<form:input path="lieuDepart" cssClass="form-control placepicker" 
+							<form:input path="lieuDepart" cssClass="form-control placepicker"
 								placeholder="Lieu de départ" data-toggle="tooltip"
 								data-placement="right"
 								title="Indiquer un lieu de départ, pour donner plus de précisions à vos passagers" />
@@ -118,9 +118,9 @@
 							class="control-label col-sm-3 col-sm-offset-2">Lieu
 							d'arrivée</label>
 						<div class="col-sm-3">
-							<form:input path="lieuArrivee" cssClass="form-control placepicker"
-								placeholder="Lieu d'arrivée" data-toggle="tooltip"
-								data-placement="right"
+							<form:input path="lieuArrivee"
+								cssClass="form-control placepicker" placeholder="Lieu d'arrivée"
+								data-toggle="tooltip" data-placement="right"
 								title="Indiquer un lieu d'arrivée, pour donner plus de précisions à vos passagers" />
 							<form:errors path="lieuArrivee"></form:errors>
 						</div>
@@ -226,7 +226,7 @@
 				<h5>
 					<strong>Détails concernant le véhicule</strong>
 				</h5>
-				<div class="thumbnail"
+				<div class="thumbnail "
 					style="background-color: #F5F5F5; padding-top: 15px;">
 					<div class="form-group">
 						<label for="adresseDepart"
@@ -249,7 +249,7 @@
 							<form:input path="model" cssClass="form-control"
 								placeholder="Exemple: Classe C" data-toggle="tooltip"
 								data-placement="right"
-								title="Indiquer une marque de véhicule, pour donner plus de précisions à vos passagers" />
+								title="Indiquer le modèle de véhicule, pour donner plus de précisions à vos passagers" />
 							<form:errors path="model"></form:errors>
 						</div>
 					</div>
@@ -305,8 +305,6 @@
 						</label>
 						<div class="col-sm-2 ">
 							<form:errors path="animauxActive"></form:errors>
-
-
 							<label class="radio-inline"><form:radiobutton
 									path="animauxActive" value="0" /> Non </label> <label
 								class="radio-inline"> <form:radiobutton
@@ -336,7 +334,7 @@
 							<input type="file" value="photo" data-toggle="tooltip"
 								name="file" data-placement="right"
 								title="Télécharger une photo, pour donner plus de précisions à vos passagers">
-							<form:errors path="model"></form:errors>
+							<form:errors path="photo"></form:errors>
 						</div>
 					</div>
 					<!-- <div class="form-group ">
@@ -415,12 +413,64 @@
 
 			}).validate({
 		errorPlacement : function errorPlacement(error, element) {
-			element.before(error);
+			element.next(error);
 		},
 		rules : {
 			confirm : {
 				equalTo : "#password-2"
+			},
+			adresseDepart : {
+				required : true,
+				minlength : 1,
+			},
+			adresseArrivee : {
+				required : true,
+				minlength : 1
+			},
+			lieuDepart : {
+				required : true,
+				minlength : 1
+			},
+			lieuArrivee : {
+				required : true,
+				minlength : 1
 			}
+			,
+			details : {
+				required : true,
+				minlength : 1
+			}
+			,
+			prix  : {
+				required : true,
+				minlength : 1
+			},
+			model : {
+				required : true,
+				minlength : 1
+			},
+			vehicule : {
+				required : true,
+				minlength : 1
+			},
+			jourDepart : {
+				required : true,
+				minlength : 1
+			},
+			heureDepart : {
+				required : true,
+				minlength : 1
+			}
+		},
+		messages : {
+			adresseDepart : "Adresse de départ obligatoire!",
+			adresseArrivee : "Adresse d'arrivée obligatoire!",
+			lieuDepart : "Lieu de départ obligatoire!",
+			lieuArrivee : "Lieu de d'arrivée obligatoire!",
+			details : "Details du trajet obligatoire!",
+			prix : "Prix obligatoire!",
+			model : "Model obligatoire!",
+			vehicule : "Marque du vehicule obligatoire!"
 		}
 	});
 </script>

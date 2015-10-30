@@ -80,6 +80,19 @@ popup
 	height: 510px;
 	overflow-y: auto;
 }
+
+.vdivide [class*='col-']:not(:last-child):after {
+  background: #e0e0e0;
+  color:black;
+  width: 1px;
+  content: "";
+  display:block;
+  position: absolute;
+  top:0;
+  bottom: 0;
+  right: 0;
+  min-height: 30px;
+}
 </style>
 
 <link rel="stylesheet"
@@ -181,7 +194,22 @@ popup
 						format : 'dd/mm/yyyy',
 						startDate : '0'
 					})
+					
+					$('#sbtbtn').attr('disabled', 'disabled');
+				});
+				 
+				$('input[type=text],input[type=password]').keyup(function() {
+				        
+				    if ($('#adresseDepart').val() !=''&&
+				    $('#adresseArrivee').val() != '' &&
+				    $('#jourDepart').val() != '') {
+				      
+				        $('#sbtbtn').removeAttr('disabled');
+				    } else {
+				        $('#sbtbtn').attr('disabled', 'disabled');
+				    }
 
+				    
 					//autocompletion cities by country : France(fr) in this case
 					var options = {
 						types : [ '(cities)' ],
@@ -202,26 +230,6 @@ popup
 						format : 'H:i',
 						step : 15
 					})
-					$('.field input').keyup(
-							function() {
-
-								var empty = false;
-								$('.field input').each(function() {
-									if ($(this).val().length == 0) {
-										empty = true;
-									}
-								})
-
-								if (empty) {
-									$('.actions button').attr('disabled',
-											'disabled');
-								} else {
-									$('.actions button')
-											.attr('disabled', false).attr(
-													'title', '');
-								}
-							})
-
 				})
 		$('.registrationForm')
 				.validate(
@@ -309,6 +317,15 @@ popup
 
 							}
 						});
+
+
+
+
+
+
+
+
+		
 		//remove div message apres la creation de l'annonce
 		function removeDiv(divId) {
 			$("#" + divId).remove();
