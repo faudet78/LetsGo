@@ -8,9 +8,6 @@ import java.security.Principal;
 
 import javax.validation.Valid;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -34,6 +31,9 @@ import com.site.covoiturage.model.Annonce;
 import com.site.covoiturage.model.User;
 import com.site.covoiturage.services.AnnonceService;
 import com.site.covoiturage.services.UserService;
+
+import lombok.Getter;
+import lombok.Setter;
 
 @Controller
 @Getter
@@ -69,8 +69,8 @@ public class CovoiturageController {
 
 	// Affiche les details d'une annonce
 	@RequestMapping("/{id}")
-	public String getAnnonceDetails(@PathVariable("id") Long id, Model model,
-			@PageableDefault(size = 10) Pageable pager, Principal principal) {
+	public String getAnnonceDetails(@PathVariable("id") Long id, Model model, @PageableDefault(size = 10) Pageable pager,
+			Principal principal) {
 		if (principal != null) {
 			String user = principal.getName();
 			model.addAttribute("user", user);
@@ -168,7 +168,7 @@ public class CovoiturageController {
 	@RequestMapping(method = RequestMethod.POST, value = "/posterAnnonce")
 	public String saveAnnonce(@Valid @ModelAttribute("annonce") Annonce annonce, BindingResult result,
 			RedirectAttributes redirectAttributes, Principal principal, Model model, MultipartFile file)
-			throws IOException {
+					throws IOException {
 
 		if (result.hasErrors()) {
 			return "poster-annonce";
@@ -182,7 +182,7 @@ public class CovoiturageController {
 			file.transferTo(new File(path + "/PROD_" + idP + "_" + file.getOriginalFilename()));
 		}
 		annonceService.save(annonce, username);
-		redirectAttributes.addFlashAttribute("message", "Votre annonce a été créée avec succès!");
+		redirectAttributes.addFlashAttribute("message", "Votre annonce a Ã©tÃ© crÃ©Ã©e avec succÃ¨s!");
 		return "redirect:/annonces.html";
 
 	}

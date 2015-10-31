@@ -53,8 +53,7 @@
 					</div>
 					<div class="form-group">
 						<label for="lieuDepart"
-							class="control-label col-sm-3 col-sm-offset-2">Lieu de
-							départ</label>
+							class="control-label col-sm-3 col-sm-offset-2">Lieu de départ <strong style="color: red">*</strong></label>
 						<div class="col-sm-3">
 							<form:input path="lieuDepart" cssClass="form-control placepicker"
 								placeholder="Lieu de départ" data-toggle="tooltip"
@@ -114,9 +113,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="lieuArrivee"
-							class="control-label col-sm-3 col-sm-offset-2">Lieu
-							d'arrivée</label>
+						<label for="lieuArrivee" class="control-label col-sm-3 col-sm-offset-2">Lieu d'arrivée <strong style="color: red">*</strong></label>
 						<div class="col-sm-3">
 							<form:input path="lieuArrivee"
 								cssClass="form-control placepicker" placeholder="Lieu d'arrivée"
@@ -235,19 +232,18 @@
 						</label>
 						<div class="col-sm-3 has-feedback">
 							<form:input path="vehicule" cssClass="form-control"
-								placeholder="Exemple: Renault Clio 2" data-toggle="tooltip"
+								placeholder="Exemple: Peugeot" data-toggle="tooltip"
 								data-placement="right"
 								title="Indiquer une marque de véhicule, pour donner plus de précisions à vos passagers" />
 							<form:errors path="vehicule"></form:errors>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="model" class="control-label col-sm-3 col-sm-offset-2">Modèle<strong
-							style="color: red"> *</strong>
+						<label for="model" class="control-label col-sm-3 col-sm-offset-2">Modèle<strong style="color: red"> *</strong>
 						</label>
 						<div class="col-sm-3 has-feedback">
 							<form:input path="model" cssClass="form-control"
-								placeholder="Exemple: Classe C" data-toggle="tooltip"
+								placeholder="Exemple: 207" data-toggle="tooltip"
 								data-placement="right"
 								title="Indiquer le modèle de véhicule, pour donner plus de précisions à vos passagers" />
 							<form:errors path="model"></form:errors>
@@ -255,8 +251,7 @@
 					</div>
 					<div class="form-group">
 						<label for="nbrePortes"
-							class="control-label col-sm-3 col-sm-offset-2">Nombre de
-							portes<strong style="color: red"> *</strong>
+							class="control-label col-sm-3 col-sm-offset-2">Nombre de portes<strong style="color: red"> *</strong>
 						</label>
 						<div class="col-sm-2">
 							<form:select path="nbrePortes" cssClass="form-control">

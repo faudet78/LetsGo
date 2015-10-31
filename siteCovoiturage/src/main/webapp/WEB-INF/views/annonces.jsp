@@ -35,28 +35,23 @@
 				<h4 align="center">
 					<span><img width="40" height="40" alt="search"
 						src="<%=request.getContextPath()%>/resources/images/Search-1.png"></span>
-					<strong class="text-uppercase" style="color: white;">Rechercher
-						un covoiturage</strong>
+					<strong class="text-uppercase" style="color: white;">Rechercher un covoiturage</strong>
 				</h4>
 			</div>
 			<div class="panel-body" style="background-color: #DCDCDC;"
 				align="center">
-				<form
-					action='<spring:url value="/annonces/chercherAnnonce "></spring:url>'
-					class="form-inline">
+				<form id="formChercherAnnonce" action='<spring:url value="/annonces/chercherAnnonce "></spring:url>' class="form-inline">
 					<div class="form-group has-feedback ">
-						<input type="text" class="form-control"
-							placeholder="Adresse de départ" value="${adresseD }"
-							id="adresseDepart" name="adresseD" /> <i
-							class="form-control-feedback "><img width="20"
-							style="margin-top: 7px;" height="20" alt="search"
-							src="<%=request.getContextPath()%>/resources/images/map-marker-green.png"></i>
+						<input id="adresseDepart" type="text" class="form-control" placeholder="Départ" value="${adresseD }" name="adresseD" /> 
+						<i class="form-control-feedback ">
+							<img width="20" style="margin-top: 7px;" height="20" alt="search" src="<%=request.getContextPath()%>/resources/images/map-marker-green.png">
+						</i>
 					</div>
 					<span style="margin-left: 5px; margin-right: 5px;"
 						class="glyphicon glyphicon-arrow-right"></span>
 					<div class="form-group has-feedback ">
 						<input type="text" class="form-control" id="adresseArrivee"
-							placeholder="Adresse d'arrivée" value="${adresseA }"
+							placeholder="Arrivée" value="${adresseA }"
 							name="adresseA" /> <i class="form-control-feedback "><img
 							width="20" style="margin-top: 7px;" height="20" alt="search"
 							src="<%=request.getContextPath()%>/resources/images/map-marker-red.png"></i>
@@ -82,10 +77,6 @@
 	page : ${current+1 }/${maxPages }
 				<nav>
 					<ul class="pagination">
-
-
-
-
 						<li><c:if test="${current=='0' }">
 								<a class="btn btn-default" disabled aria-label="Previous"><span
 									aria-hidden="true">&laquo;</span></a>
@@ -107,16 +98,18 @@
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
-							</c:if></li>
-						<li><c:if test="${current==maxPages-1 }">
-								<a class="btn btn-default" aria-label="Next" disabled><span
-									aria-hidden="true">&raquo;</span></a>
-							</c:if> <c:if test="${current<maxPages-1 }">
-								<a class="btn btn-default" aria-label="Next"
-									href='<spring:url value="/
-s.html?page=${current + 1 }"></spring:url>'><span
-									aria-hidden="true">&raquo;</span></a>
-							</c:if></li>
+							</c:if>
+						</li>
+						<li>
+							<c:if test="${current==maxPages-1 }">
+								<a class="btn btn-default" aria-label="Next" disabled>
+									<span aria-hidden="true">&raquo;</span></a>
+							</c:if> 
+							<c:if test="${current<maxPages-1 }">
+								<a class="btn btn-default" aria-label="Next" href='<spring:url value="/s.html?page=${current + 1 }"></spring:url>'>
+								<span aria-hidden="true">&raquo;</span></a>
+							</c:if>
+						</li>
 					</ul>
 				</nav>
 			</c:if>
@@ -125,7 +118,7 @@ s.html?page=${current + 1 }"></spring:url>'><span
 					<c:forEach items="${annonces }" var="annonce">
 						<a class="trip-search-oneresult"
 							href='<spring:url value="/annonces/${annonce.id}.html"></spring:url>'>
-							<div class=" row">
+							<div class="row">
 								<div class="col-sm-2 user " style="padding-right: 10px;">
 
 									<img class="img-circle "
@@ -141,30 +134,14 @@ s.html?page=${current + 1 }"></spring:url>'><span
 									<div class="row " align="left">
 										<h3 class="time light-gray">${annonce.jourDepart }</h3>
 										<h3 class="fromto">
+											<i aria-hidden="true" class="glyphicon glyphicon-road blue size18 tip"></i>
 											<span class="trip-roads-stop text-uppercase ">${annonce.adresseDepart }</span>
-											<span class="arrow-ie">→</span> <span
-												class="trip-roads-stop text-uppercase">${annonce.adresseArrivee }</span>
-											<i aria-hidden="true"
-												class="glyphicon glyphicon-road blue size18 tip "
-												title="Ce trajet emprunte l'autoroute"></i>
+											<span class="arrow-ie">→</span>
+											<span class="trip-roads-stop text-uppercase">${annonce.adresseArrivee }</span>
 										</h3>
 									</div>
-									<div class="row " align="left">
-										<i><img width="20" style="margin-top: 7px;" height="20"
-											alt="search"
-											src="<%=request.getContextPath()%>/resources/images/map-marker-green.png"></i>
-										<span class="text-capitalize">${annonce.lieuDepart }</span>
-									</div>
 									<div class="row" align="left">
-										<i><img width="20" style="margin-top: 7px;" height="20"
-											alt="search"
-											src="<%=request.getContextPath()%>/resources/images/map-marker-red.png"></i><span
-											class="text-capitalize">${annonce.lieuArrivee }</span>
-									</div>
-									<div class="row" align="left">
-										<h5>
-											Véhicule : <strong class="text-uppercase">${annonce.vehicule }</strong>
-										</h5>
+										<h5>Heure : ${annonce.heureDepart }</h5>
 									</div>
 								</div>
 								<div class="col-sm-2">
@@ -192,10 +169,7 @@ s.html?page=${current + 1 }"></spring:url>'><span
 
 									</div>
 								</div>
-
-
 							</div>
-							<hr>
 						</a>
 
 					</c:forEach>
