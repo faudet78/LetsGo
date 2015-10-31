@@ -436,11 +436,6 @@
 				minlength : 1
 			}
 			,
-			details : {
-				required : true,
-				minlength : 1
-			}
-			,
 			prix  : {
 				required : true,
 				minlength : 1
@@ -467,7 +462,6 @@
 			adresseArrivee : "Adresse d'arrivée obligatoire!",
 			lieuDepart : "Lieu de départ obligatoire!",
 			lieuArrivee : "Lieu de d'arrivée obligatoire!",
-			details : "Details du trajet obligatoire!",
 			prix : "Prix obligatoire!",
 			model : "Model obligatoire!",
 			vehicule : "Marque du vehicule obligatoire!"

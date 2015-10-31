@@ -93,6 +93,8 @@ popup
   right: 0;
   min-height: 30px;
 }
+
+
 </style>
 
 <link rel="stylesheet"
@@ -171,7 +173,7 @@ popup
 			</div>
 
 			<tiles:insertAttribute name="body"></tiles:insertAttribute>
-			<div class="footer  col-sm-12 panel-footer">
+			<div class="footer  col-sm-12 panel-footer" id="footer">
 				<tiles:insertAttribute name="footer"></tiles:insertAttribute>
 			</div>
 		</div>
