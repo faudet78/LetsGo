@@ -9,38 +9,37 @@
 	</definition>
 	<definition name="annonces" extends="common">
 		<put-attribute name="title" value="annonces" />
-		<put-attribute name="body" value="/WEB-INF/views/annonces.jsp" />
+		<put-attribute name="body" value="/WEB-INF/view/annonces.jsp" />
 		<put-attribute name="current" value="annonces"></put-attribute>
 	</definition>
 	<definition name="inscription" extends="common">
 		<put-attribute name="title" value="inscription" />
-		<put-attribute name="body" value="/WEB-INF/views/inscription.jsp" />
+		<put-attribute name="body" value="/WEB-INF/view/inscription.jsp" />
 		<put-attribute name="current" value="inscription"></put-attribute>
 	</definition>
 	<definition name="index" extends="common">
 		<put-attribute name="title" value="covoiturage" />
-		<put-attribute name="body" value="/WEB-INF/views/index.jsp" />
+		<put-attribute name="body" value="/WEB-INF/view/index.jsp" />
 		<put-attribute name="current" value="inscription"></put-attribute>
 	</definition>
 	<definition name="poster-annonce" extends="common">
 		<put-attribute name="title" value="covoiturage" />
-		<put-attribute name="body" value="/WEB-INF/views/poster-annonce.jsp" />
+		<put-attribute name="body" value="/WEB-INF/view/poster-annonce.jsp" />
 		<put-attribute name="current" value="poster-annonce"></put-attribute>
 	</definition>
 	<definition name="annonce-details" extends="common">
 		<put-attribute name="title" value="Annonce details" />
-		<put-attribute name="body" value="/WEB-INF/views/annonce-details.jsp" />
+		<put-attribute name="body" value="/WEB-INF/view/annonce-details.jsp" />
 		<put-attribute name="current" value="annonce-details"></put-attribute>
 	</definition>
 	<definition name="annonceByadresse" extends="common">
 		<put-attribute name="title" value="Resultat de la recherche" />
-		<put-attribute name="body"
-			value="/WEB-INF/views/annonceByadresse.jsp" />
+		<put-attribute name="body" value="/WEB-INF/view/annonceByadresse.jsp" />
 		<put-attribute name="current" value="annonceByadresse"></put-attribute>
 	</definition>
 	<definition name="login" extends="common">
 		<put-attribute name="title" value="Page de connexion" />
-		<put-attribute name="body" value="/WEB-INF/views/login.jsp" />
+		<put-attribute name="body" value="/WEB-INF/view/login.jsp" />
 		<put-attribute name="current" value="login"></put-attribute>
 	</definition>
 	<definition name="profil" extends="common">
@@ -48,4 +47,132 @@
 		<put-attribute name="body" value="/WEB-INF/views/profil.jsp" />
 		<put-attribute name="current" value="profil"></put-attribute>
 	</definition>
+
+	<definition name="badUser" extends="common">
+		<put-attribute name="title" value="Bad user" />
+		<put-attribute name="body" value="/WEB-INF/view/badUser.jsp" />
+
+	</definition>
+	<definition name="changePassword" extends="common">
+		<put-attribute name="title" value="Changer votre mot de passe" />
+		<put-attribute name="body" value="/WEB-INF/view/changePassword.jsp" />
+
+	</definition>
+	<definition name="console" extends="common">
+		<put-attribute name="title" value="Console" />
+		<put-attribute name="body" value="/WEB-INF/view/console.jsp" />
+
+	</definition>
+	<definition name="emailError" extends="common">
+		<put-attribute name="title" value="Email erreur" />
+		<put-attribute name="body" value="/WEB-INF/view/emailError.jsp" />
+
+	</definition>
+	<definition name="expiredAccount" extends="common">
+		<put-attribute name="title" value="Compte expiré" />
+		<put-attribute name="body" value="/WEB-INF/view/expiredAccount.jsp" />
+
+	</definition>
+	<definition name="forgetPassword" extends="common">
+		<put-attribute name="title" value="Mot de passe oublié" />
+		<put-attribute name="body" value="/WEB-INF/view/forgetPassword.jsp" />
+
+	</definition>
+	<definition name="home" extends="common">
+		<put-attribute name="title" value="Home" />
+		<put-attribute name="body" value="/WEB-INF/view/home.jsp" />
+
+	</definition>
+	<definition name="homePage" extends="common">
+		<put-attribute name="title" value="Home" />
+		<put-attribute name="body" value="/WEB-INF/view/homePage.jsp" />
+
+	</definition>
+	<definition name="invalidSession" extends="common">
+		<put-attribute name="title" value="Session invalide" />
+		<put-attribute name="body" value="/WEB-INF/view/invalidSession.jsp" />
+
+	</definition>
+	<definition name="logout" extends="common">
+		<put-attribute name="title" value="Deconnexion" />
+		<put-attribute name="body" value="/WEB-INF/view/logout.jsp" />
+
+	</definition>
+	<definition name="registration" extends="common">
+		<put-attribute name="title" value="Page d'inscription" />
+		<put-attribute name="body" value="/WEB-INF/view/registration.jsp" />
+
+	</definition>
+	<definition name="registrationConfirm" extends="common">
+		<put-attribute name="title" value="Confirmation de votre inscription" />
+		<put-attribute name="body"
+			value="/WEB-INF/view/registrationConfirm.jsp" />
+
+	</definition>
+	<definition name="successRegister" extends="common">
+		<put-attribute name="title" value="Succes de votre inscription" />
+		<put-attribute name="body" value="/WEB-INF/view/successRegister.jsp" />
+
+	</definition>
+	<definition name="updatePassword" extends="common">
+		<put-attribute name="title" value="Mise à du mot de passe" />
+		<put-attribute name="body" value="/WEB-INF/view/updatePassword.jsp" />
+
+	</definition>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </tiles-definitions>

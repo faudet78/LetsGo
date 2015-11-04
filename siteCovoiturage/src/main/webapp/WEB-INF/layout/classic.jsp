@@ -1,9 +1,8 @@
-
 <%@include file="../layout/taglib.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
 <style type="text/css">
 /* Adjust the height of section */
 #profileForm .content {
@@ -122,11 +121,11 @@ popup
 			<div class="panel-heading">
 				<security:authorize access="!isAuthenticated()">
 					<h5 class="pull-right">
-						<a style="color: black;" href="<spring:url value="/annonces/login.html"></spring:url>">
+						<a style="color: black;" href="<spring:url value="/login.html"></spring:url>">
 							<span class="glyphicon glyphicon-log-in"></span>
 							Connexion
 						</a> | 
-						<a style="color: black;" href="<spring:url value="/annonces/inscription.html"></spring:url>">
+						<a style="color: black;" href="<spring:url value="/registration.html"></spring:url>">
 							<span class="glyphicon glyphicon-registration-mark"></span>
 							Inscription
 						</a>
@@ -139,7 +138,7 @@ popup
 							${user}
 						</a>
 						 | 
-						<a style="color: black;" href="<spring:url value="/logout"></spring:url>">
+						<a style="color: black;" href="<spring:url value="/j_spring_security_logout"></spring:url>">
 							<span class="glyphicon glyphicon-log-out"></span>
 							Se deconnecter
 						</a>
