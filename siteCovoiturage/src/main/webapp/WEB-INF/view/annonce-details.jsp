@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <link rel="stylesheet" href="../../resources/files/css/style2.css">
 <link rel="stylesheet"
 	href="../../resources/files/css/bootstrap.min.css">
@@ -328,12 +329,73 @@
 							<td style="color: gray;"><h5>Par passager</h5></td>
 							<td style="color: gray;"><c:if
 									test="${annonce.placeDisponible=='1' }">
-									<h5>${annonce.placeDisponible } proposée</h5>
+									<h5>${annonce.placeDisponible }disponible</h5>
 								</c:if> <c:if test="${annonce.placeDisponible>'1' }">
-									<h5>${annonce.placeDisponible } proposées</h5>
+									<h5>${annonce.placeDisponible }disponibles</h5>
 								</c:if></td>
 						</tr>
 					</table>
+					<div>
+						<form:form commandName="reservation" method="POST"
+							cssClass="form-horizontal">
+							<c:if test="${annonce.placeDisponible=='1' }">
+								<div class="form-group">
+									<div class="col-sm-12">
+										<form:select path="nombrePlace" 
+											cssClass="form-control" >
+											<form:option value="1">1 place</form:option>
+											</form:select>
+									</div>
+								</div>
+							</c:if>
+							<c:if test="${annonce.placeDisponible=='2' }">
+								<div class="form-group">
+									<div class="col-sm-12">
+										<form:select path="nombrePlace" cssClass="form-control">
+											<form:option value="1">1 place</form:option>
+											<form:option value="2">2 places</form:option>
+										</form:select>
+
+									</div>
+								</div>
+
+							</c:if>
+							<div class="col-sm-12">
+								<c:if test="${annonce.placeDisponible=='3' }">
+									<div class="form-group">
+										<form:select path="nombrePlace" cssClass="form-control">
+											<form:option value="1">1 place</form:option>
+											<form:option value="2">2 places</form:option>
+											<form:option value="3">3 places</form:option>
+										</form:select>
+
+									</div>
+
+								</c:if>
+
+								<div class="row ">
+									<c:if test="${annonce.placeDisponible>'0' }">
+										<input type="submit"
+											class="btn btn-large btn-warning col-sm-11 " value="Reserver">
+									</c:if>
+									<c:if test="${annonce.placeDisponible=='0' }">
+										<p>Il est trop tard pour réserver sur ce trajet.
+<a href='<c:url value="/annonces.html"></c:url>'>Rechercher un autre trajet</a></p>
+											</c:if>
+
+								</div>
+
+
+
+
+							</div>
+
+
+
+						</form:form>
+
+
+					</div>
 				</div>
 				<div class="panel-default panel">
 					<div class="panel-heading ">
@@ -445,6 +507,8 @@
 						</div>
 					</div>
 				</div>
+
+
 			</div>
 		</div>
 	</div>

@@ -8,6 +8,8 @@ import javax.validation.Valid;
 import lombok.Getter;
 import lombok.Setter;
 
+/*import org.apache.commons.io.IOUtils;*/
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -23,145 +25,160 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.site.covoiturage.persistence.model.Annonce;
+import com.site.covoiturage.persistence.model.Reservation;
 import com.site.covoiturage.persistence.services.AnnonceService;
-/*import org.apache.commons.io.IOUtils;*/
-import org.springframework.beans.factory.annotation.Autowired;
+import com.site.covoiturage.persistence.services.ReservationService;
 
 @Controller
 @Getter
 @Setter
-@RequestMapping( value = "/annonces" )
+@RequestMapping(value = "/annonces")
 public class CovoiturageController {
 
-    @Autowired
-    private AnnonceService annonceService;
+	@Autowired
+	private AnnonceService annonceService;
 
-    // Charger la page d'annonces
-    @RequestMapping
-    public String getAnnonces( Model model, @PageableDefault( size = 5 ) Pageable pager, Principal principal,
-            @ModelAttribute( "message" ) String message ) {
-        if ( principal != null ) {
-            String user = principal.getName();
-            model.addAttribute( "user", user );
-        }
+	@Autowired
+	private ReservationService reservationService;
 
-        Page<Annonce> annonces = annonceService.findall( pager );
-        model.addAttribute( "annonces", annonces.getContent() );
-        Integer nbrePages = annonces.getTotalPages();
-        model.addAttribute( "maxPages", nbrePages );
-        Integer current = pager.getPageNumber();
-        model.addAttribute( "current", current );
-        model.addAttribute( message );
+	// Charger la page d'annonces
+	@RequestMapping
+	public String getAnnonces(Model model, @PageableDefault(size = 5) Pageable pager, Principal principal,
+			@ModelAttribute("message") String message) {
+		if (principal != null) {
+			String user = principal.getName();
+			model.addAttribute("user", user);
+		}
 
-        return "annonces";
-    }
+		Page<Annonce> annonces = annonceService.findall(pager);
+		model.addAttribute("annonces", annonces.getContent());
+		Integer nbrePages = annonces.getTotalPages();
+		model.addAttribute("maxPages", nbrePages);
+		Integer current = pager.getPageNumber();
+		model.addAttribute("current", current);
+		model.addAttribute(message);
 
-    // Affiche les details d'une annonce
-    @RequestMapping( "/{id}" )
-    public String getAnnonceDetails( @PathVariable( "id" ) Long id, Model model,
-            @PageableDefault( size = 10 ) Pageable pager, Principal principal ) {
-        if ( principal != null ) {
-            String user = principal.getName();
-            model.addAttribute( "user", user );
-        }
+		return "annonces";
+	}
 
-        Annonce annonce = annonceService.findByid( id );
-        model.addAttribute( "annonce", annonce );
-        Long idUser = annonce.getUser().getId();
-        Page<Annonce> annoncesUser = annonceService.getAnnonceByUser( idUser, pager );
-        Long nbreAnnonces = annoncesUser.getTotalElements();
-        model.addAttribute( "annonces", annoncesUser.getContent() );
-        model.addAttribute( "nbreAnnonces", nbreAnnonces );
+	// Affiche les details d'une annonce
+	@RequestMapping("/{id}")
+	public String getAnnonceDetails(@PathVariable("id") Long id, Model model,
+			@PageableDefault(size = 10) Pageable pager, Principal principal) {
+		if (principal != null) {
+			String user = principal.getName();
+			model.addAttribute("user", user);
+		}
 
-        return "annonce-details";
-    }
+		Annonce annonce = annonceService.findByid(id);
+		model.addAttribute("annonce", annonce);
+		Long idUser = annonce.getUser().getId();
+		Page<Annonce> annoncesUser = annonceService.getAnnonceByUser(idUser, pager);
+		Long nbreAnnonces = annoncesUser.getTotalElements();
+		model.addAttribute("annonces", annoncesUser.getContent());
+		model.addAttribute("nbreAnnonces", nbreAnnonces);
 
-    // Afficher le resultat de la recherche des annonces
-    @RequestMapping( "/chercherAnnonce" )
-    public String getAnnoncesParAdresse( @RequestParam String adresseD, @RequestParam String adresseA,
-            @RequestParam String jourDepart, Model model, @PageableDefault( size = 5 ) Pageable pager,
-            Principal principal ) {
-        if ( principal != null ) {
-            String user = principal.getName();
-            model.addAttribute( "user", user );
-        }
-        Page<Annonce> annonces = annonceService.getAnnonceByAdresse( adresseD, adresseA, jourDepart, pager );
-        model.addAttribute( "annonces", annonces.getContent() );
-        model.addAttribute( "adresseD", adresseD );
-        model.addAttribute( "adresseA", adresseA );
-        model.addAttribute( "jourDepart", jourDepart );
-        Integer nbrePages = annonces.getTotalPages();
-        model.addAttribute( "maxPages", nbrePages );
-        Integer current = pager.getPageNumber();
-        model.addAttribute( "current", current );
-        Long nbreAnnonces = annonces.getTotalElements();
-        model.addAttribute( "nbreAnnonces", nbreAnnonces );
+		return "annonce-details";
+	}
 
-        return "annonceByadresse";
-    }
+	// Afficher le resultat de la recherche des annonces
+	@RequestMapping("/chercherAnnonce")
+	public String getAnnoncesParAdresse(@RequestParam String adresseD, @RequestParam String adresseA,
+			@RequestParam String jourDepart, Model model, @PageableDefault(size = 5) Pageable pager, Principal principal) {
+		if (principal != null) {
+			String user = principal.getName();
+			model.addAttribute("user", user);
+		}
+		Page<Annonce> annonces = annonceService.getAnnonceByAdresse(adresseD, adresseA, jourDepart, pager);
+		model.addAttribute("annonces", annonces.getContent());
+		model.addAttribute("adresseD", adresseD);
+		model.addAttribute("adresseA", adresseA);
+		model.addAttribute("jourDepart", jourDepart);
+		Integer nbrePages = annonces.getTotalPages();
+		model.addAttribute("maxPages", nbrePages);
+		Integer current = pager.getPageNumber();
+		model.addAttribute("current", current);
+		Long nbreAnnonces = annonces.getTotalElements();
+		model.addAttribute("nbreAnnonces", nbreAnnonces);
 
-    @RequestMapping( value = "/inscription" )
-    public String showInscription() {
-        return "inscription";
-    }
+		return "annonceByadresse";
+	}
 
-    // ModelAttribute annonce
-    @ModelAttribute( "annonce" )
-    public Annonce constructAnnonce() {
-        return new Annonce();
-    }
+	@RequestMapping(value = "/inscription")
+	public String showInscription() {
+		return "inscription";
+	}
 
-    // Affiche le formulaire de la creation d'une annonce
-    @RequestMapping( value = "/posterAnnonce" )
-    public String getAnnoncePage( Principal principal, Model model ) {
-        if ( principal != null ) {
-            String user = principal.getName();
-            model.addAttribute( "user", user );
-        }
-        return "poster-annonce";
-    }
+	// ModelAttribute annonce
+	@ModelAttribute("annonce")
+	public Annonce constructAnnonce() {
+		return new Annonce();
+	}
 
-    // Methode de l'ajout de d'une annonce
-    @RequestMapping( method = RequestMethod.POST, value = "/posterAnnonce" )
-    public String saveAnnonce( @Valid @ModelAttribute( "annonce" ) Annonce annonce, BindingResult result,
-            RedirectAttributes redirectAttributes, Principal principal, Model model )
-            throws IOException {
+	// Affiche le formulaire de la creation d'une annonce
+	@RequestMapping(value = "/posterAnnonce")
+	public String getAnnoncePage(Principal principal, Model model) {
+		if (principal != null) {
+			String user = principal.getName();
+			model.addAttribute("user", user);
+		}
+		return "poster-annonce";
+	}
 
-        if ( result.hasErrors() ) {
-            return "poster-annonce";
-        }
+	// Methode de l'ajout de d'une annonce
+	@RequestMapping(method = RequestMethod.POST, value = "/posterAnnonce")
+	public String saveAnnonce(@Valid @ModelAttribute("annonce") Annonce annonce, BindingResult result,
+			RedirectAttributes redirectAttributes, Principal principal, Model model) throws IOException {
 
-        String username = principal.getName();
+		if (result.hasErrors()) {
+			return "poster-annonce";
+		}
 
-        Long idP = annonceService.save( annonce, username );
+		String username = principal.getName();
 
-        annonceService.save( annonce, username );
-        redirectAttributes.addFlashAttribute( "message", "Votre annonce a été créée avec succès!" );
-        return "redirect:/annonces.html";
+		Long idP = annonceService.save(annonce, username);
 
-    }
+		annonceService.save(annonce, username);
+		redirectAttributes.addFlashAttribute("message", "Votre annonce a été créée avec succès!");
+		return "redirect:/annonces.html";
 
-    @RequestMapping( "/login" )
-    public ModelAndView getLoginForm( @RequestParam( required = false ) String authfailed, String logout, String denied ) {
-        String message = "";
-        if ( authfailed != null ) {
-            message = "Username or password incorrect, try again!";
-        } else if ( logout != null ) {
-            message = "Successfully logged out!";
-        } else if ( denied != null ) {
-            message = "Access denied";
-        }
+	}
 
-        return new ModelAndView( "login", "message", message );
-    }
+	@RequestMapping("/login")
+	public ModelAndView getLoginForm(@RequestParam(required = false) String authfailed, String logout, String denied) {
+		String message = "";
+		if (authfailed != null) {
+			message = "Username or password incorrect, try again!";
+		} else if (logout != null) {
+			message = "Successfully logged out!";
+		} else if (denied != null) {
+			message = "Access denied";
+		}
 
-    @RequestMapping( "/403page" )
-    public String get403page() {
-        return "redirect:login?denied";
-    }
+		return new ModelAndView("login", "message", message);
+	}
 
-    public CovoiturageController() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	@RequestMapping("/403page")
+	public String get403page() {
+		return "redirect:login?denied";
+	}
+
+	public CovoiturageController() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	@ModelAttribute("reservation")
+	public Reservation constructReservation() {
+		return new Reservation();
+	}
+
+	@RequestMapping(value = "/reservation", method = RequestMethod.POST)
+	public String doReservation(@ModelAttribute("reservation") Reservation reservation, Long idUser, Long idAnnonce,
+			Model model) {
+
+		reservationService.addReservation(reservation, idAnnonce, idUser);
+		return "annonces";
+	}
+
 }

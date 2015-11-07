@@ -1,6 +1,8 @@
 package com.site.covoiturage.persistence.services;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.UUID;
 
 import javax.transaction.Transactional;
@@ -21,103 +23,105 @@ import com.site.covoiturage.validation.EmailExistsException;
 @Service
 @Transactional
 public class UserService implements IUserService {
-    @Autowired
-    private UserRepository               repository;
 
-    @Autowired
-    private VerificationTokenRepository  tokenRepository;
+	@Autowired
+	private UserRepository repository;
 
-    @Autowired
-    private PasswordResetTokenRepository passwordTokenRepository;
+	@Autowired
+	private VerificationTokenRepository tokenRepository;
 
-    @Autowired
-    private PasswordEncoder              passwordEncoder;
+	@Autowired
+	private PasswordResetTokenRepository passwordTokenRepository;
 
-    @Autowired
-    private RoleRepository               roleRepository;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
-    // API
+	@Autowired
+	private RoleRepository roleRepository;
 
-    public User registerNewUserAccount( final UserDto accountDto ) throws EmailExistsException {
-        if ( emailExist( accountDto.getEmail() ) ) {
-            throw new EmailExistsException( "There is an account with that email adress: " + accountDto.getEmail() );
-        }
-        final User user = new User();
+	// API
 
-        user.setFirstName( accountDto.getFirstName() );
-        user.setLastName( accountDto.getLastName() );
-        user.setPassword( passwordEncoder.encode( accountDto.getPassword() ) );
-        user.setEmail( accountDto.getEmail() );
+	public User registerNewUserAccount(final UserDto accountDto) throws EmailExistsException {
+		if (emailExist(accountDto.getEmail())) {
+			throw new EmailExistsException("There is an account with that email adress: " + accountDto.getEmail());
+		}
+		final User user = new User();
 
-        user.setRoles( Arrays.asList( roleRepository.findByName( "ROLE_USER" ) ) );
-        return repository.save( user );
-    }
+		user.setFirstName(accountDto.getFirstName());
+		user.setLastName(accountDto.getLastName());
+		user.setPassword(passwordEncoder.encode(accountDto.getPassword()));
+		user.setEmail(accountDto.getEmail());
+		user.setDateInscription(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
 
-    public User getUser( final String verificationToken ) {
-        final User user = tokenRepository.findByToken( verificationToken ).getUser();
-        return user;
-    }
+		user.setRoles(Arrays.asList(roleRepository.findByName("ROLE_USER")));
+		return repository.save(user);
+	}
 
-    public VerificationToken getVerificationToken( final String VerificationToken ) {
-        return tokenRepository.findByToken( VerificationToken );
-    }
+	public User getUser(final String verificationToken) {
+		final User user = tokenRepository.findByToken(verificationToken).getUser();
+		return user;
+	}
 
-    public void saveRegisteredUser( final User user ) {
-        repository.save( user );
-    }
+	public VerificationToken getVerificationToken(final String VerificationToken) {
+		return tokenRepository.findByToken(VerificationToken);
+	}
 
-    public void deleteUser( final User user ) {
-        repository.delete( user );
-    }
+	public void saveRegisteredUser(final User user) {
+		repository.save(user);
+	}
 
-    public void createVerificationTokenForUser( final User user, final String token ) {
-        final VerificationToken myToken = new VerificationToken( token, user );
-        tokenRepository.save( myToken );
-    }
+	public void deleteUser(final User user) {
+		repository.delete(user);
+	}
 
-    public VerificationToken generateNewVerificationToken( final String existingVerificationToken ) {
-        VerificationToken vToken = tokenRepository.findByToken( existingVerificationToken );
-        vToken.updateToken( UUID.randomUUID().toString() );
-        vToken = tokenRepository.save( vToken );
-        return vToken;
-    }
+	public void createVerificationTokenForUser(final User user, final String token) {
+		final VerificationToken myToken = new VerificationToken(token, user);
+		tokenRepository.save(myToken);
+	}
 
-    public void createPasswordResetTokenForUser( final User user, final String token ) {
-        final PasswordResetToken myToken = new PasswordResetToken( token, user );
-        passwordTokenRepository.save( myToken );
-    }
+	public VerificationToken generateNewVerificationToken(final String existingVerificationToken) {
+		VerificationToken vToken = tokenRepository.findByToken(existingVerificationToken);
+		vToken.updateToken(UUID.randomUUID().toString());
+		vToken = tokenRepository.save(vToken);
+		return vToken;
+	}
 
-    public User findUserByEmail( final String email ) {
-        return repository.findByEmail( email );
-    }
+	public void createPasswordResetTokenForUser(final User user, final String token) {
+		final PasswordResetToken myToken = new PasswordResetToken(token, user);
+		passwordTokenRepository.save(myToken);
+	}
 
-    public PasswordResetToken getPasswordResetToken( final String token ) {
-        return passwordTokenRepository.findByToken( token );
-    }
+	public User findUserByEmail(final String email) {
+		return repository.findByEmail(email);
+	}
 
-    public User getUserByPasswordResetToken( final String token ) {
-        return passwordTokenRepository.findByToken( token ).getUser();
-    }
+	public PasswordResetToken getPasswordResetToken(final String token) {
+		return passwordTokenRepository.findByToken(token);
+	}
 
-    public User getUserByID( final long id ) {
-        return repository.findOne( id );
-    }
+	public User getUserByPasswordResetToken(final String token) {
+		return passwordTokenRepository.findByToken(token).getUser();
+	}
 
-    public void changeUserPassword( final User user, final String password ) {
-        user.setPassword( passwordEncoder.encode( password ) );
-        repository.save( user );
-    }
+	public User getUserByID(final long id) {
+		return repository.findOne(id);
+	}
 
-    public boolean checkIfValidOldPassword( final User user, final String oldPassword ) {
-        return passwordEncoder.matches( oldPassword, user.getPassword() );
-    }
+	public void changeUserPassword(final User user, final String password) {
+		user.setPassword(passwordEncoder.encode(password));
+		repository.save(user);
+	}
 
-    private boolean emailExist( final String email ) {
-        final User user = repository.findByEmail( email );
-        if ( user != null ) {
-            return true;
-        }
-        return false;
-    }
+	public boolean checkIfValidOldPassword(final User user, final String oldPassword) {
+		return passwordEncoder.matches(oldPassword, user.getPassword());
+	}
+
+	private boolean emailExist(final String email) {
+		final User user = repository.findByEmail(email);
+		if (user != null) {
+			return true;
+		}
+		return false;
+	}
 
 }

@@ -77,7 +77,7 @@
 				<br>
 				<button type="submit" class="btn btn-primary ladda-button"
 					data-style="expand-right" data-size="s" data-color="blue">
-					<spring:message code="label.form.submit"></spring:message>
+					<spring:message code="label.form.register"></spring:message>
 				</button>
 			</form>
 			<br> <a href="<c:url value="login.html" />"><spring:message
@@ -105,7 +105,7 @@
 											instance.stop();
 											clearInterval(interval);
 										}
-									}, 300);
+									}, 400);
 								}
 							});
 							$(":password")

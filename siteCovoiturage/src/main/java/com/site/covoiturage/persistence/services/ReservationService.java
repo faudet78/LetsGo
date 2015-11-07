@@ -16,26 +16,26 @@ import com.site.covoiturage.persistence.repositories.UserRepository;
 @Transactional
 public class ReservationService {
 
-    @Autowired
-    private ReservationRepository reserverRepository;
+	@Autowired
+	private ReservationRepository reserverRepository;
 
-    @Autowired
-    private UserRepository        userRepository;
+	@Autowired
+	private UserRepository userRepository;
 
-    @Autowired
-    private AnnonceRepository     annonceRepository;
+	@Autowired
+	private AnnonceRepository annonceRepository;
 
-    public Reservation addReservation( Reservation reserver, Long idUser, Long idAnnonce ) {
-        User user = userRepository.findOne( idUser );
-        Annonce annonce = annonceRepository.findOne( idAnnonce );
-        annonce.setPlaceDisponible( annonce.getPlaceDisponible() - reserver.getNombrePlace() );
-        reserver.setPrixTotal( annonce.getPrix() * reserver.getNombrePlace() );
-        reserver.setUser( user );
-        reserver.setAnnonce( annonce );
-        reserverRepository.save( reserver );
+	public Reservation addReservation(Reservation reserver, Long idUser, Long idAnnonce) {
+		User user = userRepository.findOne(idUser);
+		Annonce annonce = annonceRepository.findOne(idAnnonce);
+		annonce.setPlaceDisponible(annonce.getPlaceDisponible() - reserver.getNombrePlace());
+		reserver.setPrixTotal(annonce.getPrix() * reserver.getNombrePlace());
+		reserver.setUser(user);
+		reserver.setAnnonce(annonce);
+		reserverRepository.save(reserver);
 
-        return reserver;
+		return reserver;
 
-    }
+	}
 
 }
