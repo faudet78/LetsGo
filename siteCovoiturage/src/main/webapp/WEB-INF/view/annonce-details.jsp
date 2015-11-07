@@ -341,10 +341,9 @@
 							<c:if test="${annonce.placeDisponible=='1' }">
 								<div class="form-group">
 									<div class="col-sm-12">
-										<form:select path="nombrePlace" 
-											cssClass="form-control" >
+										<form:select path="nombrePlace" cssClass="form-control">
 											<form:option value="1">1 place</form:option>
-											</form:select>
+										</form:select>
 									</div>
 								</div>
 							</c:if>
@@ -360,7 +359,7 @@
 								</div>
 
 							</c:if>
-							<div class="col-sm-12">
+							<div class="col-sm-12 ">
 								<c:if test="${annonce.placeDisponible=='3' }">
 									<div class="form-group">
 										<form:select path="nombrePlace" cssClass="form-control">
@@ -379,9 +378,12 @@
 											class="btn btn-large btn-warning col-sm-11 " value="Reserver">
 									</c:if>
 									<c:if test="${annonce.placeDisponible=='0' }">
-										<p>Il est trop tard pour réserver sur ce trajet.
-<a href='<c:url value="/annonces.html"></c:url>'>Rechercher un autre trajet</a></p>
-											</c:if>
+										<p>
+											Il est trop tard pour réserver sur ce trajet. <a
+												href='<c:url value="/annonces.html"></c:url>'>Rechercher
+												un autre trajet</a>
+										</p>
+									</c:if>
 
 								</div>
 
