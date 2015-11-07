@@ -29,6 +29,6 @@
 	</mvc:annotation-driven>
 	<context:annotation-config></context:annotation-config>
 	<mvc:resources location="/resources/files/" mapping="/resources/**" />
-	<mvc:view-controller path="/" view-name="annonces"/>
+	<mvc:view-controller path="/" view-name="annonces" />
 
 </beans>

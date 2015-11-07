@@ -17,69 +17,70 @@ import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
-@Component( "myAuthenticationSuccessHandler" )
+@Component("myAuthenticationSuccessHandler")
 public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
-    private final Logger     logger           = LoggerFactory.getLogger( getClass() );
 
-    private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+	private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    public void onAuthenticationSuccess( final HttpServletRequest request, final HttpServletResponse response,
-            final Authentication authentication ) throws IOException {
-        handle( request, response, authentication );
-        final HttpSession session = request.getSession( false );
-        if ( session != null ) {
-            session.setMaxInactiveInterval( 30 * 60 );
-        }
-        clearAuthenticationAttributes( request );
-    }
+	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
-    protected void handle( final HttpServletRequest request, final HttpServletResponse response,
-            final Authentication authentication ) throws IOException {
-        final String targetUrl = determineTargetUrl( authentication );
+	public void onAuthenticationSuccess(final HttpServletRequest request, final HttpServletResponse response,
+			final Authentication authentication) throws IOException {
+		handle(request, response, authentication);
+		final HttpSession session = request.getSession(false);
+		if (session != null) {
+			session.setMaxInactiveInterval(30 * 60);
+		}
+		clearAuthenticationAttributes(request);
+	}
 
-        if ( response.isCommitted() ) {
-            logger.debug( "Response has already been committed. Unable to redirect to " + targetUrl );
-            return;
-        }
+	protected void handle(final HttpServletRequest request, final HttpServletResponse response,
+			final Authentication authentication) throws IOException {
+		final String targetUrl = determineTargetUrl(authentication);
 
-        redirectStrategy.sendRedirect( request, response, targetUrl );
-    }
+		if (response.isCommitted()) {
+			logger.debug("Response has already been committed. Unable to redirect to " + targetUrl);
+			return;
+		}
 
-    protected String determineTargetUrl( final Authentication authentication ) {
-        boolean isUser = false;
-        boolean isAdmin = false;
-        final Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-        for ( final GrantedAuthority grantedAuthority : authorities ) {
-            if ( grantedAuthority.getAuthority().equals( "READ_PRIVILEGE" ) ) {
-                isUser = true;
-            } else if ( grantedAuthority.getAuthority().equals( "WRITE_PRIVILEGE" ) ) {
-                isAdmin = true;
-                isUser = false;
-                break;
-            }
-        }
-        if ( isUser ) {
-            return "/homepage.html?user=" + authentication.getName();
-        } else if ( isAdmin ) {
-            return "/console.html";
-        } else {
-            throw new IllegalStateException();
-        }
-    }
+		redirectStrategy.sendRedirect(request, response, targetUrl);
+	}
 
-    protected void clearAuthenticationAttributes( final HttpServletRequest request ) {
-        final HttpSession session = request.getSession( false );
-        if ( session == null ) {
-            return;
-        }
-        session.removeAttribute( WebAttributes.AUTHENTICATION_EXCEPTION );
-    }
+	protected String determineTargetUrl(final Authentication authentication) {
+		boolean isUser = false;
+		boolean isAdmin = false;
+		final Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+		for (final GrantedAuthority grantedAuthority : authorities) {
+			if (grantedAuthority.getAuthority().equals("READ_PRIVILEGE")) {
+				isUser = true;
+			} else if (grantedAuthority.getAuthority().equals("WRITE_PRIVILEGE")) {
+				isAdmin = true;
+				isUser = false;
+				break;
+			}
+		}
+		if (isUser) {
+			return "/annonces?user=" + authentication.getName();
+		} else if (isAdmin) {
+			return "/console.html";
+		} else {
+			throw new IllegalStateException();
+		}
+	}
 
-    public void setRedirectStrategy( final RedirectStrategy redirectStrategy ) {
-        this.redirectStrategy = redirectStrategy;
-    }
+	protected void clearAuthenticationAttributes(final HttpServletRequest request) {
+		final HttpSession session = request.getSession(false);
+		if (session == null) {
+			return;
+		}
+		session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+	}
 
-    protected RedirectStrategy getRedirectStrategy() {
-        return redirectStrategy;
-    }
+	public void setRedirectStrategy(final RedirectStrategy redirectStrategy) {
+		this.redirectStrategy = redirectStrategy;
+	}
+
+	protected RedirectStrategy getRedirectStrategy() {
+		return redirectStrategy;
+	}
 }

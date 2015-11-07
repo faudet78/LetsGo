@@ -41,191 +41,191 @@ import com.site.covoiturage.web.util.GenericResponse;
 
 @Controller
 public class RegistrationController {
-    private final Logger              LOGGER = LoggerFactory.getLogger( getClass() );
 
-    @Autowired
-    private IUserService              userService;
+	private final Logger LOGGER = LoggerFactory.getLogger(getClass());
 
-    @Autowired
-    private MessageSource             messages;
+	@Autowired
+	private IUserService userService;
 
-    @Autowired
-    private JavaMailSender            mailSender;
+	@Autowired
+	private MessageSource messages;
 
-    @Autowired
-    private ApplicationEventPublisher eventPublisher;
+	@Autowired
+	private JavaMailSender mailSender;
 
-    @Autowired
-    private UserDetailsService        userDetailsService;
+	@Autowired
+	private ApplicationEventPublisher eventPublisher;
 
-    @Autowired
-    private Environment               env;
+	@Autowired
+	private UserDetailsService userDetailsService;
 
-    public RegistrationController() {
-        super();
-    }
+	@Autowired
+	private Environment env;
 
-    // Registration
+	public RegistrationController() {
+		super();
+	}
 
-    @RequestMapping( value = "/user/registration", method = RequestMethod.POST )
-    @ResponseBody
-    public GenericResponse registerUserAccount( @Valid final UserDto accountDto, final HttpServletRequest request ) {
-        LOGGER.debug( "Registering user account with information: {}", accountDto );
+	// Registration
 
-        final User registered = createUserAccount( accountDto );
-        if ( registered == null ) {
-            throw new UserAlreadyExistException();
-        }
-        final String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort()
-                + request.getContextPath();
-        eventPublisher.publishEvent( new OnRegistrationCompleteEvent( registered, request.getLocale(), appUrl ) );
+	@RequestMapping(value = "/user/registration", method = RequestMethod.POST)
+	@ResponseBody
+	public GenericResponse registerUserAccount(@Valid final UserDto accountDto, final HttpServletRequest request) {
+		LOGGER.debug("Registering user account with information: {}", accountDto);
 
-        return new GenericResponse( "success" );
-    }
+		final User registered = createUserAccount(accountDto);
+		if (registered == null) {
+			throw new UserAlreadyExistException();
+		}
+		final String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort()
+				+ request.getContextPath();
+		eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, request.getLocale(), appUrl));
 
-    @RequestMapping( value = "/regitrationConfirm", method = RequestMethod.GET )
-    public String confirmRegistration( final Locale locale, final Model model,
-            @RequestParam( "token" ) final String token ) {
-        final VerificationToken verificationToken = userService.getVerificationToken( token );
-        if ( verificationToken == null ) {
-            final String message = messages.getMessage( "auth.message.invalidToken", null, locale );
-            model.addAttribute( "message", message );
-            return "redirect:/badUser.html?lang=" + locale.getLanguage();
-        }
+		return new GenericResponse("success");
+	}
 
-        final User user = verificationToken.getUser();
-        final Calendar cal = Calendar.getInstance();
-        if ( ( verificationToken.getExpiryDate().getTime() - cal.getTime().getTime() ) <= 0 ) {
-            model.addAttribute( "message", messages.getMessage( "auth.message.expired", null, locale ) );
-            model.addAttribute( "expired", true );
-            model.addAttribute( "token", token );
-            return "redirect:/badUser.html?lang=" + locale.getLanguage();
-        }
+	@RequestMapping(value = "/regitrationConfirm", method = RequestMethod.GET)
+	public String confirmRegistration(final Locale locale, final Model model, @RequestParam("token") final String token) {
+		final VerificationToken verificationToken = userService.getVerificationToken(token);
+		if (verificationToken == null) {
+			final String message = messages.getMessage("auth.message.invalidToken", null, locale);
+			model.addAttribute("message", message);
+			return "redirect:/badUser.html?lang=" + locale.getLanguage();
+		}
 
-        user.setEnabled( true );
-        userService.saveRegisteredUser( user );
-        model.addAttribute( "message", messages.getMessage( "message.accountVerified", null, locale ) );
-        return "redirect:/login.html?lang=" + locale.getLanguage();
-    }
+		final User user = verificationToken.getUser();
+		final Calendar cal = Calendar.getInstance();
+		if ((verificationToken.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
+			model.addAttribute("message", messages.getMessage("auth.message.expired", null, locale));
+			model.addAttribute("expired", true);
+			model.addAttribute("token", token);
+			return "redirect:/badUser.html?lang=" + locale.getLanguage();
+		}
 
-    // user activation - verification
+		user.setEnabled(true);
+		userService.saveRegisteredUser(user);
+		model.addAttribute("message", messages.getMessage("message.accountVerified", null, locale));
+		return "redirect:/login.html?lang=" + locale.getLanguage();
+	}
 
-    @RequestMapping( value = "/user/resendRegistrationToken", method = RequestMethod.GET )
-    @ResponseBody
-    public GenericResponse resendRegistrationToken( final HttpServletRequest request,
-            @RequestParam( "token" ) final String existingToken ) {
-        final VerificationToken newToken = userService.generateNewVerificationToken( existingToken );
-        final User user = userService.getUser( newToken.getToken() );
-        final String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort()
-                + request.getContextPath();
-        final SimpleMailMessage email = constructResendVerificationTokenEmail( appUrl, request.getLocale(), newToken,
-                user );
-        mailSender.send( email );
+	// user activation - verification
 
-        return new GenericResponse( messages.getMessage( "message.resendToken", null, request.getLocale() ) );
-    }
+	@RequestMapping(value = "/user/resendRegistrationToken", method = RequestMethod.GET)
+	@ResponseBody
+	public GenericResponse resendRegistrationToken(final HttpServletRequest request,
+			@RequestParam("token") final String existingToken) {
+		final VerificationToken newToken = userService.generateNewVerificationToken(existingToken);
+		final User user = userService.getUser(newToken.getToken());
+		final String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort()
+				+ request.getContextPath();
+		final SimpleMailMessage email = constructResendVerificationTokenEmail(appUrl, request.getLocale(), newToken, user);
+		mailSender.send(email);
 
-    // Reset password
+		return new GenericResponse(messages.getMessage("message.resendToken", null, request.getLocale()));
+	}
 
-    @RequestMapping( value = "/user/resetPassword", method = RequestMethod.POST )
-    @ResponseBody
-    public GenericResponse resetPassword( final HttpServletRequest request,
-            @RequestParam( "email" ) final String userEmail ) {
-        final User user = userService.findUserByEmail( userEmail );
-        if ( user == null ) {
-            throw new UserNotFoundException();
-        }
+	// Reset password
 
-        final String token = UUID.randomUUID().toString();
-        userService.createPasswordResetTokenForUser( user, token );
-        final String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort()
-                + request.getContextPath();
-        final SimpleMailMessage email = constructResetTokenEmail( appUrl, request.getLocale(), token, user );
-        mailSender.send( email );
-        return new GenericResponse( messages.getMessage( "message.resetPasswordEmail", null, request.getLocale() ) );
-    }
+	@RequestMapping(value = "/user/resetPassword", method = RequestMethod.POST)
+	@ResponseBody
+	public GenericResponse resetPassword(final HttpServletRequest request, @RequestParam("email") final String userEmail) {
+		final User user = userService.findUserByEmail(userEmail);
+		if (user == null) {
+			throw new UserNotFoundException();
+		}
 
-    @RequestMapping( value = "/user/changePassword", method = RequestMethod.GET )
-    public String showChangePasswordPage( final Locale locale, final Model model, @RequestParam( "id" ) final long id,
-            @RequestParam( "token" ) final String token ) {
-        final PasswordResetToken passToken = userService.getPasswordResetToken( token );
-        final User user = passToken.getUser();
-        if ( passToken == null || user.getId() != id ) {
-            final String message = messages.getMessage( "auth.message.invalidToken", null, locale );
-            model.addAttribute( "message", message );
-            return "redirect:/login.html?lang=" + locale.getLanguage();
-        }
+		final String token = UUID.randomUUID().toString();
+		userService.createPasswordResetTokenForUser(user, token);
+		final String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort()
+				+ request.getContextPath();
+		final SimpleMailMessage email = constructResetTokenEmail(appUrl, request.getLocale(), token, user);
+		mailSender.send(email);
+		return new GenericResponse(messages.getMessage("message.resetPasswordEmail", null, request.getLocale()));
+	}
 
-        final Calendar cal = Calendar.getInstance();
-        if ( ( passToken.getExpiryDate().getTime() - cal.getTime().getTime() ) <= 0 ) {
-            model.addAttribute( "message", messages.getMessage( "auth.message.expired", null, locale ) );
-            return "redirect:/login.html?lang=" + locale.getLanguage();
-        }
-        final Authentication auth = new UsernamePasswordAuthenticationToken( user, null, userDetailsService
-                .loadUserByUsername( user.getEmail() ).getAuthorities() );
-        SecurityContextHolder.getContext().setAuthentication( auth );
+	@RequestMapping(value = "/user/changePassword", method = RequestMethod.GET)
+	public String showChangePasswordPage(final Locale locale, final Model model, @RequestParam("id") final long id,
+			@RequestParam("token") final String token) {
+		final PasswordResetToken passToken = userService.getPasswordResetToken(token);
+		final User user = passToken.getUser();
+		if (passToken == null || user.getId() != id) {
+			final String message = messages.getMessage("auth.message.invalidToken", null, locale);
+			model.addAttribute("message", message);
+			return "redirect:/login.html?lang=" + locale.getLanguage();
+		}
 
-        return "redirect:/updatePassword.html?lang=" + locale.getLanguage();
-    }
+		final Calendar cal = Calendar.getInstance();
+		if ((passToken.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
+			model.addAttribute("message", messages.getMessage("auth.message.expired", null, locale));
+			return "redirect:/login.html?lang=" + locale.getLanguage();
+		}
+		final Authentication auth = new UsernamePasswordAuthenticationToken(user, null, userDetailsService
+				.loadUserByUsername(user.getEmail()).getAuthorities());
+		SecurityContextHolder.getContext().setAuthentication(auth);
 
-    @RequestMapping( value = "/user/savePassword", method = RequestMethod.POST )
-    @PreAuthorize( "hasRole('READ_PRIVILEGE')" )
-    @ResponseBody
-    public GenericResponse savePassword( final Locale locale, @RequestParam( "password" ) final String password ) {
-        final User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        userService.changeUserPassword( user, password );
-        return new GenericResponse( messages.getMessage( "message.resetPasswordSuc", null, locale ) );
-    }
+		return "redirect:/updatePassword.html?lang=" + locale.getLanguage();
+	}
 
-    // change user password
+	@RequestMapping(value = "/user/savePassword", method = RequestMethod.POST)
+	@PreAuthorize("hasRole('READ_PRIVILEGE')")
+	@ResponseBody
+	public GenericResponse savePassword(final Locale locale, @RequestParam("password") final String password) {
+		final User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		userService.changeUserPassword(user, password);
+		return new GenericResponse(messages.getMessage("message.resetPasswordSuc", null, locale));
+	}
 
-    @RequestMapping( value = "/user/updatePassword", method = RequestMethod.POST )
-    @PreAuthorize( "hasRole('READ_PRIVILEGE')" )
-    @ResponseBody
-    public GenericResponse changeUserPassword( final Locale locale, @RequestParam( "password" ) final String password,
-            @RequestParam( "oldpassword" ) final String oldPassword ) {
-        final User user = userService
-                .findUserByEmail( SecurityContextHolder.getContext().getAuthentication().getName() );
-        if ( !userService.checkIfValidOldPassword( user, oldPassword ) ) {
-            throw new InvalidOldPasswordException();
-        }
-        userService.changeUserPassword( user, password );
-        return new GenericResponse( messages.getMessage( "message.updatePasswordSuc", null, locale ) );
-    }
+	// change user password
 
-    // NON-API
+	@RequestMapping(value = "/user/updatePassword", method = RequestMethod.POST)
+	@PreAuthorize("hasRole('READ_PRIVILEGE')")
+	@ResponseBody
+	public GenericResponse changeUserPassword(final Locale locale, @RequestParam("password") final String password,
+			@RequestParam("oldpassword") final String oldPassword) {
+		final User user = userService.findUserByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+		if (!userService.checkIfValidOldPassword(user, oldPassword)) {
+			throw new InvalidOldPasswordException();
+		}
+		userService.changeUserPassword(user, password);
+		return new GenericResponse(messages.getMessage("message.updatePasswordSuc", null, locale));
+	}
 
-    private final SimpleMailMessage constructResendVerificationTokenEmail( final String contextPath,
-            final Locale locale, final VerificationToken newToken, final User user ) {
-        final String confirmationUrl = contextPath + "/regitrationConfirm.html?token=" + newToken.getToken();
-        final String message = messages.getMessage( "message.resendToken", null, locale );
-        final SimpleMailMessage email = new SimpleMailMessage();
-        email.setSubject( "Resend Registration Token" );
-        email.setText( message + " \r\n" + confirmationUrl );
-        email.setTo( user.getEmail() );
-        email.setFrom( env.getProperty( "support.email" ) );
-        return email;
-    }
+	// NON-API
 
-    private final SimpleMailMessage constructResetTokenEmail( final String contextPath, final Locale locale,
-            final String token, final User user ) {
-        final String url = contextPath + "/user/changePassword?id=" + user.getId() + "&token=" + token;
-        final String message = messages.getMessage( "message.resetPassword", null, locale );
-        final SimpleMailMessage email = new SimpleMailMessage();
-        email.setTo( user.getEmail() );
-        email.setSubject( "Reset Password" );
-        email.setText( message + " \r\n" + url );
-        email.setFrom( env.getProperty( "support.email" ) );
-        return email;
-    }
+	private final SimpleMailMessage constructResendVerificationTokenEmail(final String contextPath, final Locale locale,
+			final VerificationToken newToken, final User user) {
+		final String confirmationUrl = contextPath + "/regitrationConfirm.html?token=" + newToken.getToken();
+		final String message = messages.getMessage("message.resendToken", null, locale);
+		final SimpleMailMessage email = new SimpleMailMessage();
+		email.setSubject("Resend Registration Token");
+		email.setText(message + " \r\n" + confirmationUrl);
+		email.setTo(user.getEmail());
+		email.setFrom(env.getProperty("support.email"));
+		return email;
+	}
 
-    private User createUserAccount( final UserDto accountDto ) {
-        User registered = null;
-        try {
-            registered = userService.registerNewUserAccount( accountDto );
-        } catch ( final EmailExistsException e ) {
-            return null;
-        }
-        return registered;
-    }
+	private final SimpleMailMessage constructResetTokenEmail(final String contextPath, final Locale locale,
+			final String token, final User user) {
+		final String url = contextPath + "/user/changePassword?id=" + user.getId() + "&token=" + token;
+		final String message = messages
+				.getMessage(
+						"Vous avez oublié votre mot de passe. Desolé! \r\n Mais ne vous inquietez pas, cliquez sur le lien ci-dessus pour réinitialiser. ",
+						null, locale);
+		final SimpleMailMessage email = new SimpleMailMessage();
+		email.setTo(user.getEmail());
+		email.setSubject("Réinitialisation de votre mot de passe");
+		email.setText(message + " \r\n" + url);
+		email.setFrom(env.getProperty("support.email"));
+		return email;
+	}
+
+	private User createUserAccount(final UserDto accountDto) {
+		User registered = null;
+		try {
+			registered = userService.registerNewUserAccount(accountDto);
+		} catch (final EmailExistsException e) {
+			return null;
+		}
+		return registered;
+	}
 }

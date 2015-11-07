@@ -15,14 +15,14 @@
 <title><spring:message code="label.pages.home.title"></spring:message></title>
 </head>
 <body>
-<div >
+<div class="">
             <h1 class="alert alert-success">
 				<spring:message code="message.regSucc"></spring:message>
 			</h1>
 			<a href="<c:url value="/login.html" />"><spring:message
 					code="label.login"></spring:message></a>
 	</div>
-	<div style="height: 600px;">
+	<div style="height: 450px;">
 		</div>
 </body>
 </html>

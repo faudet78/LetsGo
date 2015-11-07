@@ -23,84 +23,86 @@ import com.site.covoiturage.validation.EmailValidator;
 import com.site.covoiturage.validation.PasswordMatchesValidator;
 
 @Configuration
-@ComponentScan( basePackages = { "com.site.covoiturage.web" } )
+@ComponentScan(basePackages = {
+	"com.site.covoiturage.web"
+})
 @EnableWebMvc
 public class MvcConfig extends WebMvcConfigurerAdapter {
 
-    public MvcConfig() {
-        super();
-    }
+	public MvcConfig() {
+		super();
+	}
 
-    //
+	//
 
-    @Override
-    public void addViewControllers( final ViewControllerRegistry registry ) {
-        super.addViewControllers( registry );
-        registry.addViewController( "/login.html" );
-        registry.addViewController( "/registration.html" );
-        registry.addViewController( "/logout.html" );
-        registry.addViewController( "/homepage.html" );
-        registry.addViewController( "/expiredAccount.html" );
-        registry.addViewController( "/badUser.html" );
-        registry.addViewController( "/emailError.html" );
-        registry.addViewController( "/home.html" );
-        registry.addViewController( "/invalidSession.html" );
-        registry.addViewController( "/console.html" );
-        registry.addViewController( "/admin.html" );
-        registry.addViewController( "/successRegister.html" );
-        registry.addViewController( "/forgetPassword.html" );
-        registry.addViewController( "/updatePassword.html" );
-        registry.addViewController( "/changePassword.html" );
-    }
+	@Override
+	public void addViewControllers(final ViewControllerRegistry registry) {
+		super.addViewControllers(registry);
+		registry.addViewController("/login.html");
+		registry.addViewController("/registration.html");
+		registry.addViewController("/logout.html");
+		registry.addViewController("/homepage.html");
+		registry.addViewController("/expiredAccount.html");
+		registry.addViewController("/badUser.html");
+		registry.addViewController("/emailError.html");
+		registry.addViewController("/home.html");
+		registry.addViewController("/invalidSession.html");
+		registry.addViewController("/console.html");
+		registry.addViewController("/admin.html");
+		registry.addViewController("/successRegister.html");
+		registry.addViewController("/forgetPassword.html");
+		registry.addViewController("/updatePassword.html");
+		registry.addViewController("/changePassword.html");
+	}
 
-    @Override
-    public void addResourceHandlers( final ResourceHandlerRegistry registry ) {
-        registry.addResourceHandler( "/resources/**" ).addResourceLocations( "/", "/resources/" );
-    }
+	@Override
+	public void addResourceHandlers(final ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/resources/**").addResourceLocations("/", "/resources/");
+	}
 
-    @Override
-    public void addInterceptors( final InterceptorRegistry registry ) {
-        final LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
-        localeChangeInterceptor.setParamName( "lang" );
-        registry.addInterceptor( localeChangeInterceptor );
-    }
+	@Override
+	public void addInterceptors(final InterceptorRegistry registry) {
+		final LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
+		localeChangeInterceptor.setParamName("lang");
+		registry.addInterceptor(localeChangeInterceptor);
+	}
 
-    // beans
+	// beans
 
-    @Bean
-    public ViewResolver viewResolver() {
-        final InternalResourceViewResolver bean = new InternalResourceViewResolver();
-        bean.setViewClass( JstlView.class );
-        bean.setPrefix( "/WEB-INF/view/" );
-        bean.setSuffix( ".jsp" );
-        return bean;
-    }
+	@Bean
+	public ViewResolver viewResolver() {
+		final InternalResourceViewResolver bean = new InternalResourceViewResolver();
+		bean.setViewClass(JstlView.class);
+		bean.setPrefix("/WEB-INF/view/");
+		bean.setSuffix(".jsp");
+		return bean;
+	}
 
-    @Bean
-    public LocaleResolver localeResolver() {
-        final CookieLocaleResolver cookieLocaleResolver = new CookieLocaleResolver();
-        cookieLocaleResolver.setDefaultLocale( Locale.ENGLISH );
-        return cookieLocaleResolver;
-    }
+	@Bean
+	public LocaleResolver localeResolver() {
+		final CookieLocaleResolver cookieLocaleResolver = new CookieLocaleResolver();
+		cookieLocaleResolver.setDefaultLocale(Locale.FRENCH);
+		return cookieLocaleResolver;
+	}
 
-    @Bean
-    public MessageSource messageSource() {
-        final ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-        messageSource.setBasename( "classpath:messages" );
-        messageSource.setUseCodeAsDefaultMessage( true );
-        messageSource.setDefaultEncoding( "UTF-8" );
-        messageSource.setCacheSeconds( 0 );
-        return messageSource;
-    }
+	@Bean
+	public MessageSource messageSource() {
+		final ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+		messageSource.setBasename("classpath:messages");
+		messageSource.setUseCodeAsDefaultMessage(true);
+		messageSource.setDefaultEncoding("UTF-8");
+		messageSource.setCacheSeconds(0);
+		return messageSource;
+	}
 
-    @Bean
-    public EmailValidator usernameValidator() {
-        return new EmailValidator();
-    }
+	@Bean
+	public EmailValidator usernameValidator() {
+		return new EmailValidator();
+	}
 
-    @Bean
-    public PasswordMatchesValidator passwordMatchesValidator() {
-        return new PasswordMatchesValidator();
-    }
+	@Bean
+	public PasswordMatchesValidator passwordMatchesValidator() {
+		return new PasswordMatchesValidator();
+	}
 
 }

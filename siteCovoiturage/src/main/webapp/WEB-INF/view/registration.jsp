@@ -9,6 +9,8 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/resources/css/style.css">
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/resources/css/ladda.min.css">
 <style>
 .password-verdict {
 	color: #000;
@@ -17,6 +19,10 @@
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="<c:url value="/resources/js/pwstrength.js" />"></script>
+<script type="text/javascript"
+	src="<%=request.getContextPath()%>/resources/js/spin.min.js"></script>
+<script type="text/javascript"
+	src="<%=request.getContextPath()%>/resources/js/ladda.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><spring:message code="label.form.title"></spring:message></title>
 </head>
@@ -69,7 +75,8 @@
 						class="alert alert-danger col-sm-3" style="display: none"></span>
 				</div>
 				<br>
-				<button type="submit" class="btn btn-primary">
+				<button type="submit" class="btn btn-primary ladda-button"
+					data-style="expand-right" data-size="s" data-color="blue">
 					<spring:message code="label.form.submit"></spring:message>
 				</button>
 			</form>
@@ -77,6 +84,7 @@
 					code="label.form.loginLink"></spring:message></a>
 		</div>
 	</div>
+	<div style="height: 100px;"></div>
 
 	<script type="text/javascript">
 		$(document)
@@ -85,7 +93,21 @@
 							$('form').submit(function(event) {
 								register(event);
 							});
+							Ladda.bind('button', {
+								callback : function(instance) {
+									var progress = 0;
+									var interval = setInterval(function() {
+										progress = Math.min(progress
+												+ Math.random() * 0.1, 1);
+										instance.setProgress(progress);
 
+										if (progress === 1) {
+											instance.stop();
+											clearInterval(interval);
+										}
+									}, 300);
+								}
+							});
 							$(":password")
 									.keyup(
 											function() {
@@ -107,6 +129,10 @@
 								},
 								ui : {
 									showVerdictsInsideProgressBar : true,
+									scores : [ 17, 26, 40, 50 ],
+									verdicts : [ "Faible", "Normale", "Moyen",
+											"Fort", "Très Fort" ],
+									showverdicts : true,
 									showErrors : true,
 									errorMessages : {
 										wordLength : '<spring:message code="error.wordLength"/>',

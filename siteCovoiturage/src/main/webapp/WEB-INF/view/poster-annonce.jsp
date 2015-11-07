@@ -12,6 +12,7 @@
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/resources/js/jquery.placepicker.js"></script>
 
+<div id="demo"></div>
 
 <div class="">
 	<div class="panel-heading"

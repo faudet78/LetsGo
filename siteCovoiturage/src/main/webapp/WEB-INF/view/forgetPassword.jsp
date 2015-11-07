@@ -27,7 +27,7 @@
 <a class="btn btn-default" href="<c:url value="registration.html" />"><spring:message code="label.form.loginSignUp"></spring:message></a>
 <br><br>
 <a class="btn btn-default" href="<c:url value="login.html" />"><spring:message code="label.form.loginLink"></spring:message></a>
-<div style="height: 600px;">
+<div style="height: 400px;">
 		</div>
 </div>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
