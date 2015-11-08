@@ -1,5 +1,8 @@
 package com.site.covoiturage.persistence.services;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +33,7 @@ public class ReservationService {
 		Annonce annonce = annonceRepository.findOne(idAnnonce);
 		annonce.setPlaceDisponible(annonce.getPlaceDisponible() - reserver.getNombrePlace());
 		reserver.setPrixTotal(annonce.getPrix() * reserver.getNombrePlace());
+		reserver.setDateCreation(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
 		reserver.setUser(user);
 		reserver.setAnnonce(annonce);
 		reserverRepository.save(reserver);

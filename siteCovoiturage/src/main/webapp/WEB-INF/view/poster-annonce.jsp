@@ -142,8 +142,7 @@
 								<form:option value="1">1</form:option>
 								<form:option value="2">2</form:option>
 								<form:option value="3">3</form:option>
-								<form:option value="4">4</form:option>
-								<form:option value="5">5</form:option>
+								
 							</form:select>
 							<form:errors path="nbrePersonnes"></form:errors>
 						</div>
@@ -158,10 +157,7 @@
 								<form:option value="1">1</form:option>
 								<form:option value="2">2</form:option>
 								<form:option selected="selected" value="3">3</form:option>
-								<form:option value="4">4</form:option>
-								<form:option value="5">5</form:option>
-								<form:option value="6">6</form:option>
-								<form:option value="7">7</form:option>
+							
 							</form:select>
 							<form:errors path="placeProposees"></form:errors>
 						</div>

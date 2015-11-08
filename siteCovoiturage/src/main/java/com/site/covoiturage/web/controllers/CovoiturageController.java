@@ -27,6 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.site.covoiturage.persistence.model.Annonce;
 import com.site.covoiturage.persistence.model.Reservation;
 import com.site.covoiturage.persistence.services.AnnonceService;
+import com.site.covoiturage.persistence.services.IUserService;
 import com.site.covoiturage.persistence.services.ReservationService;
 
 @Controller
@@ -40,6 +41,9 @@ public class CovoiturageController {
 
 	@Autowired
 	private ReservationService reservationService;
+
+	@Autowired
+	private IUserService userService;
 
 	// Charger la page d'annonces
 	@RequestMapping
@@ -174,11 +178,14 @@ public class CovoiturageController {
 	}
 
 	@RequestMapping(value = "/reservation", method = RequestMethod.POST)
-	public String doReservation(@ModelAttribute("reservation") Reservation reservation, Long idUser, Long idAnnonce,
-			Model model) {
-
-		reservationService.addReservation(reservation, idAnnonce, idUser);
-		return "annonces";
+	public String doReservation(@ModelAttribute("reservation") Reservation reservation, Model model,
+			Principal principal, RedirectAttributes redirectAttributes) {
+		/*
+		 * String email = principal.getName(); User user =
+		 * userService.findUserByEmail(email); Long idUser = user.getId();
+		 */
+		reservationService.addReservation(reservation, 2L, 1L);
+		redirectAttributes.addFlashAttribute("message", "Succès de votre réservation!");
+		return "redirect:/annonces.html";
 	}
-
 }

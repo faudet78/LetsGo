@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <link rel="stylesheet" href="../../resources/files/css/style2.css">
 <link rel="stylesheet"
@@ -336,8 +337,7 @@
 						</tr>
 					</table>
 					<div>
-						<form:form commandName="reservation" method="POST"
-							cssClass="form-horizontal">
+						<form:form modelAttribute="reservation"  action="reservation" cssClass="form-horizontal">
 							<c:if test="${annonce.placeDisponible=='1' }">
 								<div class="form-group">
 									<div class="col-sm-12">
