@@ -184,6 +184,7 @@ public class CovoiturageController {
 		 * String email = principal.getName(); User user =
 		 * userService.findUserByEmail(email); Long idUser = user.getId();
 		 */
+
 		reservationService.addReservation(reservation, 2L, 1L);
 		redirectAttributes.addFlashAttribute("message", "Succès de votre réservation!");
 		return "redirect:/annonces.html";

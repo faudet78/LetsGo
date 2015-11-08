@@ -105,7 +105,7 @@
 											instance.stop();
 											clearInterval(interval);
 										}
-									}, 400);
+									}, 600);
 								}
 							});
 							$(":password")
