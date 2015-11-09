@@ -168,7 +168,9 @@ popup
 						<a class="glyphicon dropdown-toggle " data-toggle="dropdown"><span
 							class="glyphicon glyphicon-user"> </span>${user }<b class="caret"></b></a>
 						<ul class="dropdown-menu">
-							<li><a href="#">Vos annonces</a></li>
+							<li><a
+								href="<spring:url value="/annonces/dashboard.html"></spring:url>">Vos
+									annonces</a></li>
 							<li><a href="#">Vos réservations</a></li>
 							<li><a href="#">Profil</a></li>
 							<li class="divider"></li>

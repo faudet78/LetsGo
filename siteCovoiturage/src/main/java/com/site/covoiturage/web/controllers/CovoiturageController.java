@@ -188,4 +188,25 @@ public class CovoiturageController {
 		redirectAttributes.addFlashAttribute("message", "Succès de votre réservation!");
 		return "redirect:/annonces.html";
 	}
+
+	@RequestMapping(value = "/dashboard")
+	public String getDashboard(Principal principal, Model model, @PageableDefault(size = 4) Pageable pager) {
+		String user = null;
+		if (principal != null) {
+			user = principal.getName();
+			model.addAttribute("user", user);
+		}
+		Page<Annonce> annoncesUser = annonceService.getAnnonceByUserEmail(user, pager);
+		Long nbreAnnonces = annoncesUser.getTotalElements();
+		model.addAttribute("annonces", annoncesUser.getContent());
+		model.addAttribute("nbreAnnonces", nbreAnnonces);
+		Integer nbrePages = annoncesUser.getTotalPages();
+		model.addAttribute("maxPages", nbrePages);
+		Integer current = pager.getPageNumber();
+		model.addAttribute("current", current);
+
+		return "dashboard";
+
+	}
+
 }

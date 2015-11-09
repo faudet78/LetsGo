@@ -42,4 +42,10 @@ public class ReservationService {
 
 	}
 
+	/*
+	 * public List<Reservation> findByUser(String user) { // TODO Auto-generated
+	 * method stub List<Reservation>reservations = reserverRepository.findByUser
+	 * return null; }
+	 */
+
 }

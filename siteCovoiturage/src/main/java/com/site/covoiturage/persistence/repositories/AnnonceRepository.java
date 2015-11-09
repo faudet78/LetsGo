@@ -14,13 +14,12 @@ public interface AnnonceRepository extends JpaRepository<Annonce, Long> {
 	Page<Annonce> findAnnonceByAdresse(@Param("adresseD") String adresseD, @Param("adresseA") String adresseA,
 			@Param("jourDepart") String jourDepart, Pageable pageable);
 
-	/*
-	 * @Query( value = "select a from Annonce a", countQuery =
-	 * "count(a) from Annonce a" )
-	 */
 	Page<Annonce> findAll(Pageable pageable);
 
 	@Query("select a from Annonce a where a.user.id =:id ")
 	Page<Annonce> findAnnonceByUser(@Param("id") Long id, Pageable pageable);
+
+	@Query("select a from Annonce a where a.user.email =:email ")
+	Page<Annonce> findAnnonceByUserEmail(@Param("email") String email, Pageable pageable);
 
 }

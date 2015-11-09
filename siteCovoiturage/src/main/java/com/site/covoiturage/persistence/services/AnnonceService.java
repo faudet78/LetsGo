@@ -20,46 +20,49 @@ import com.site.covoiturage.persistence.repositories.UserRepository;
 @Transactional
 public class AnnonceService {
 
-    @Autowired
-    private AnnonceRepository annonceRepository;
+	@Autowired
+	private AnnonceRepository annonceRepository;
 
-    @Autowired
-    private UserRepository    userRepository;
+	@Autowired
+	private UserRepository userRepository;
 
-    public List<Annonce> findAll() {
-        return annonceRepository.findAll();
-    }
+	public List<Annonce> findAll() {
+		return annonceRepository.findAll();
+	}
 
-    public Page<Annonce> findall( Pageable p ) {
-        return annonceRepository.findAll( p );
-    }
+	public Page<Annonce> findall(Pageable p) {
+		return annonceRepository.findAll(p);
+	}
 
-    public Long save( Annonce annonce, String email ) {
-        User user = userRepository.findByEmail( email );
-        annonce.setUser( user );
-        annonce.setTypeTrajet( "Allee simple" );
-        annonce.setDateCreation( new SimpleDateFormat( "dd/MM/yyyy" ).format( new Date() ) );
-        annonce.setPlaceDisponible( annonce.getPlaceProposees() );
-        annonceRepository.save( annonce );
-        return user.getId();
-    }
+	public Long save(Annonce annonce, String email) {
+		User user = userRepository.findByEmail(email);
+		annonce.setUser(user);
+		annonce.setTypeTrajet("Allee simple");
+		annonce.setDateCreation(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
+		annonce.setPlaceDisponible(annonce.getPlaceProposees());
+		annonceRepository.save(annonce);
+		return user.getId();
+	}
 
-    public Annonce findByid( Long id ) {
-        // TODO Auto-generated method stub
-        return annonceRepository.findOne( id );
-    }
+	public Annonce findByid(Long id) {
+		// TODO Auto-generated method stub
+		return annonceRepository.findOne(id);
+	}
 
-    public Page<Annonce> getAnnonceByAdresse( String adresseD, String adresseA, String jourDepart, Pageable pageable ) {
-        return annonceRepository
-                .findAnnonceByAdresse( "%" + adresseD + "%", "%" + adresseA + "%", jourDepart, pageable );
-    }
+	public Page<Annonce> getAnnonceByAdresse(String adresseD, String adresseA, String jourDepart, Pageable pageable) {
+		return annonceRepository.findAnnonceByAdresse("%" + adresseD + "%", "%" + adresseA + "%", jourDepart, pageable);
+	}
 
-    public Page<Annonce> getAnnonceByUser( Long id, Pageable pageable ) {
-        return annonceRepository.findAnnonceByUser( id, pageable );
-    }
+	public Page<Annonce> getAnnonceByUser(Long id, Pageable pageable) {
+		return annonceRepository.findAnnonceByUser(id, pageable);
+	}
 
-    public User findById( Long id ) {
-        return userRepository.findOne( id );
-    }
+	public Page<Annonce> getAnnonceByUserEmail(String email, Pageable pageable) {
+		return annonceRepository.findAnnonceByUserEmail(email, pageable);
+	}
+
+	public User findById(Long id) {
+		return userRepository.findOne(id);
+	}
 
 }
