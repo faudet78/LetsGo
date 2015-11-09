@@ -53,12 +53,10 @@ public class InitDbService {
 		System.out.println("==========Test find End===============");
 	}
 
-	/*
-	 * @PostConstruct
-	 */
+	/* @PostConstruct */
 	public void test1() {
 		Reservation reservation = reservationService.addReservation(new Reservation(1L,
-				new SimpleDateFormat("dd/MM/yyyy").format(new Date())), 4L, 1L);
+				new SimpleDateFormat("dd/MM/yyyy").format(new Date())), "azeredudu1@gmail.com", 1L);
 
 	}
 

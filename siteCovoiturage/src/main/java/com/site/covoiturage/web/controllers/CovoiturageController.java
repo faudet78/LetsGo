@@ -66,7 +66,7 @@ public class CovoiturageController {
 	}
 
 	// Affiche les details d'une annonce
-	@RequestMapping("/{id}")
+	@RequestMapping("{id}")
 	public String getAnnonceDetails(@PathVariable("id") Long id, Model model,
 			@PageableDefault(size = 10) Pageable pager, Principal principal) {
 		if (principal != null) {
@@ -177,15 +177,14 @@ public class CovoiturageController {
 		return new Reservation();
 	}
 
-	@RequestMapping(value = "/reservation", method = RequestMethod.POST)
+	@RequestMapping(value = "/reservation/{id}", method = RequestMethod.POST)
 	public String doReservation(@ModelAttribute("reservation") Reservation reservation, Model model,
-			Principal principal, RedirectAttributes redirectAttributes) {
-		/*
-		 * String email = principal.getName(); User user =
-		 * userService.findUserByEmail(email); Long idUser = user.getId();
-		 */
-
-		reservationService.addReservation(reservation, 2L, 1L);
+			Principal principal, RedirectAttributes redirectAttributes, String user, @PathVariable Long id) {
+		if (principal != null) {
+			user = principal.getName();
+			model.addAttribute("user", user);
+		}
+		reservationService.addReservation(reservation, user, id);
 		redirectAttributes.addFlashAttribute("message", "Succès de votre réservation!");
 		return "redirect:/annonces.html";
 	}

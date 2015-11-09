@@ -337,7 +337,7 @@
 						</tr>
 					</table>
 					<div>
-						<form:form modelAttribute="reservation"  action="reservation" cssClass="form-horizontal">
+						<form:form modelAttribute="reservation"  action="reservation/${annonce.id}" cssClass="form-horizontal">
 							<c:if test="${annonce.placeDisponible=='1' }">
 								<div class="form-group">
 									<div class="col-sm-12">
@@ -361,6 +361,7 @@
 							</c:if>
 							<div class="col-sm-12 ">
 								<c:if test="${annonce.placeDisponible=='3' }">
+							
 									<div class="form-group">
 										<form:select path="nombrePlace" cssClass="form-control">
 											<form:option value="1">1 place</form:option>

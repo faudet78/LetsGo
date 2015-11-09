@@ -28,8 +28,8 @@ public class ReservationService {
 	@Autowired
 	private AnnonceRepository annonceRepository;
 
-	public Reservation addReservation(Reservation reserver, Long idUser, Long idAnnonce) {
-		User user = userRepository.findOne(idUser);
+	public Reservation addReservation(Reservation reserver, String email, Long idAnnonce) {
+		User user = userRepository.findByEmail(email);
 		Annonce annonce = annonceRepository.findOne(idAnnonce);
 		annonce.setPlaceDisponible(annonce.getPlaceDisponible() - reserver.getNombrePlace());
 		reserver.setPrixTotal(annonce.getPrix() * reserver.getNombrePlace());
