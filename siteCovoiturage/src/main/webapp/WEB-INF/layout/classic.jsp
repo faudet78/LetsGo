@@ -169,9 +169,9 @@ popup
 							class="glyphicon glyphicon-user"> </span>${user }<b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li><a
-								href="<spring:url value="/annonces/dashboard.html"></spring:url>">Vos
+								href="<spring:url value="/annonces/dashboard/annonces.html"></spring:url>">Vos
 									annonces</a></li>
-							<li><a href="#">Vos réservations</a></li>
+							<li><a href="<spring:url value="/annonces/dashboard/reservations.html"></spring:url>">Vos réservations</a></li>
 							<li><a href="#">Profil</a></li>
 							<li class="divider"></li>
 							<li><a

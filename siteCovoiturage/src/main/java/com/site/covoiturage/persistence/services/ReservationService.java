@@ -6,6 +6,8 @@ import java.util.Date;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.site.covoiturage.persistence.model.Annonce;
@@ -42,10 +44,8 @@ public class ReservationService {
 
 	}
 
-	/*
-	 * public List<Reservation> findByUser(String user) { // TODO Auto-generated
-	 * method stub List<Reservation>reservations = reserverRepository.findByUser
-	 * return null; }
-	 */
+	public Page<Reservation> findReservationByUser(String email, Pageable pageable) {
+		return reserverRepository.findReservationByUser(email, pageable);
+	}
 
 }
