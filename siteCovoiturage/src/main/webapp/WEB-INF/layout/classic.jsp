@@ -140,7 +140,7 @@ popup
 	src="<%=request.getContextPath()%>/resources/js/spin.min.js"></script>
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/resources/js/ladda.min.js"></script>
-	<script type="text/javascript"
+<script type="text/javascript"
 	src="<%=request.getContextPath()%>/resources/js/jquery.introLoader.js"></script>
 
 
@@ -164,14 +164,21 @@ popup
 					</h5>
 				</security:authorize>
 				<security:authorize access="isAuthenticated()">
-					<h5 class="pull-right">
-						<a style="color: black;" href="#"> <span class="glyphicon "></span>
-							${user}
-						</a> | <a style="color: black;"
-							href="<spring:url value="/j_spring_security_logout"></spring:url>">
-							<span class="glyphicon glyphicon-log-out"></span> Se deconnecter
-						</a>
-					</h5>
+					<div class="btn-group pull-right">
+						<a class="glyphicon dropdown-toggle " data-toggle="dropdown"><span
+							class="glyphicon glyphicon-user"> </span>${user }<b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">Vos annonces</a></li>
+							<li><a href="#">Vos réservations</a></li>
+							<li><a href="#">Profil</a></li>
+							<li class="divider"></li>
+							<li><a
+								href="<spring:url value="/j_spring_security_logout"></spring:url>">Se
+									deconnecter</a></li>
+
+						</ul>
+					</div>
+
 				</security:authorize>
 				<br>
 			</div>
