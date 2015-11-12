@@ -23,7 +23,7 @@
 			covoiturage</h5>
 	</div>
 	<div class="panel-body">
-		<form:form id="annonceForm" modelAttribute="annonce"
+		<form:form id="annonceForm" modelAttribute="annonce" enctype="utf8"
 			
 			cssClass="form-horizontal registrationForm">
 
