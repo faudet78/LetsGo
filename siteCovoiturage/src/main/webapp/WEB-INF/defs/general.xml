@@ -119,9 +119,14 @@
 		<put-attribute name="body" value="/WEB-INF/view/updatePassword.jsp" />
 
 	</definition>
-	<definition name="dashboard" extends="common">
+	<definition name="annoncesUser" extends="common">
 		<put-attribute name="title" value="Votre tableau de bord" />
-		<put-attribute name="body" value="/WEB-INF/view/dashboard.jsp" />
+		<put-attribute name="body" value="/WEB-INF/view/annoncesUser.jsp" />
+
+	</definition>
+	<definition name="reservationsUser" extends="common">
+		<put-attribute name="title" value="Vos reservations" />
+		<put-attribute name="body" value="/WEB-INF/view/reservationsUser.jsp" />
 
 	</definition>
 
