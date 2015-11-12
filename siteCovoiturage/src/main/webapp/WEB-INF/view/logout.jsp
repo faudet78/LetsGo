@@ -27,7 +27,7 @@
             <a class="btn btn-primary" href="<c:url value="login.html" />"><spring:message
                     code="label.form.loginLink"></spring:message></a>
     </div>
-    <div style="height: 600px;">
+    <div style="height: 300px;">
 		</div>
 </body>
 

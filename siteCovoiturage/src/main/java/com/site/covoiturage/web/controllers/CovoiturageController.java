@@ -190,7 +190,7 @@ public class CovoiturageController {
 	}
 
 	@RequestMapping(value = "/dashboard/annonces")
-	public String getDashboardAnnonces(Principal principal, Model model, @PageableDefault(size = 4) Pageable pager) {
+	public String getDashboardAnnonces(Principal principal, Model model, @PageableDefault(size = 5) Pageable pager) {
 		String user = null;
 		if (principal != null) {
 			user = principal.getName();
@@ -204,24 +204,13 @@ public class CovoiturageController {
 		model.addAttribute("maxPages", nbrePages);
 		Integer current = pager.getPageNumber();
 		model.addAttribute("current", current);
-
-		return "dashboard";
-
-	}
-
-	@RequestMapping(value = "/dashboard/reservations")
-	public String getDashboardReservations(Principal principal, Model model, @PageableDefault(size = 4) Pageable pager) {
-		String user = null;
-		if (principal != null) {
-			user = principal.getName();
-			model.addAttribute("user", user);
-		}
+		// reservations
 		Page<Reservation> reservations = reservationService.findReservationByUser(user, pager);
 		model.addAttribute("reservations", reservations.getContent());
-		Integer nbrePages = reservations.getTotalPages();
-		model.addAttribute("maxPages", nbrePages);
-		Integer current = pager.getPageNumber();
-		model.addAttribute("current", current);
+		Integer nbrePagess = reservations.getTotalPages();
+		model.addAttribute("maxPagess", nbrePagess);
+		Integer currents = pager.getPageNumber();
+		model.addAttribute("currents", currents);
 
 		return "dashboard";
 

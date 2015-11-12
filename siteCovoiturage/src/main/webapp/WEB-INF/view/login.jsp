@@ -104,7 +104,7 @@ ${param.message}
             <a class="btn btn-default" href="<c:url value="/forgetPassword.html" />"><spring:message
               code="message.resetPassword"></spring:message></a>
         </div>
-        <div style="height: 200px;">
+        <div style="height: 50px;">
 		</div>
     </div>
 </body>
