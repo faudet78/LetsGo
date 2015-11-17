@@ -26,6 +26,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.site.covoiturage.persistence.model.Annonce;
 import com.site.covoiturage.persistence.model.Reservation;
+import com.site.covoiturage.persistence.model.User;
 import com.site.covoiturage.persistence.services.AnnonceService;
 import com.site.covoiturage.persistence.services.IUserService;
 import com.site.covoiturage.persistence.services.ReservationService;
@@ -50,7 +51,8 @@ public class CovoiturageController {
 	public String getAnnonces(Model model, @PageableDefault(size = 5) Pageable pager, Principal principal,
 			@ModelAttribute("message") String message) {
 		if (principal != null) {
-			String user = principal.getName();
+			String email = principal.getName();
+			User user = userService.findUserByEmail(email);
 			model.addAttribute("user", user);
 		}
 
@@ -70,7 +72,8 @@ public class CovoiturageController {
 	public String getAnnonceDetails(@PathVariable("id") Long id, Model model,
 			@PageableDefault(size = 10) Pageable pager, Principal principal) {
 		if (principal != null) {
-			String user = principal.getName();
+			String email = principal.getName();
+			User user = userService.findUserByEmail(email);
 			model.addAttribute("user", user);
 		}
 
@@ -90,7 +93,8 @@ public class CovoiturageController {
 	public String getAnnoncesParAdresse(@RequestParam String adresseD, @RequestParam String adresseA,
 			@RequestParam String jourDepart, Model model, @PageableDefault(size = 5) Pageable pager, Principal principal) {
 		if (principal != null) {
-			String user = principal.getName();
+			String email = principal.getName();
+			User user = userService.findUserByEmail(email);
 			model.addAttribute("user", user);
 		}
 		Page<Annonce> annonces = annonceService.getAnnonceByAdresse(adresseD, adresseA, jourDepart, pager);
@@ -123,7 +127,8 @@ public class CovoiturageController {
 	@RequestMapping(value = "/posterAnnonce")
 	public String getAnnoncePage(Principal principal, Model model) {
 		if (principal != null) {
-			String user = principal.getName();
+			String email = principal.getName();
+			User user = userService.findUserByEmail(email);
 			model.addAttribute("user", user);
 		}
 		return "poster-annonce";
@@ -179,24 +184,26 @@ public class CovoiturageController {
 
 	@RequestMapping(value = "/reservation/{id}", method = RequestMethod.POST)
 	public String doReservation(@ModelAttribute("reservation") Reservation reservation, Model model,
-			Principal principal, RedirectAttributes redirectAttributes, String user, @PathVariable Long id) {
+			Principal principal, RedirectAttributes redirectAttributes, String email, @PathVariable Long id) {
 		if (principal != null) {
-			user = principal.getName();
+			email = principal.getName();
+			User user = userService.findUserByEmail(email);
 			model.addAttribute("user", user);
 		}
-		reservationService.addReservation(reservation, user, id);
+		reservationService.addReservation(reservation, email, id);
 		redirectAttributes.addFlashAttribute("message", "Succès de votre réservation!");
 		return "redirect:/annonces.html";
 	}
 
 	@RequestMapping(value = "/dashboard/annonces")
 	public String getDashboardAnnonces(Principal principal, Model model, @PageableDefault(size = 5) Pageable pager) {
-		String user = null;
+		String email = null;
 		if (principal != null) {
-			user = principal.getName();
+			email = principal.getName();
+			User user = userService.findUserByEmail(email);
 			model.addAttribute("user", user);
 		}
-		Page<Annonce> annoncesUser = annonceService.getAnnonceByUserEmail(user, pager);
+		Page<Annonce> annoncesUser = annonceService.getAnnonceByUserEmail(email, pager);
 		Long nbreAnnonces = annoncesUser.getTotalElements();
 		model.addAttribute("annonces", annoncesUser.getContent());
 		model.addAttribute("nbreAnnonces", nbreAnnonces);
@@ -211,12 +218,13 @@ public class CovoiturageController {
 
 	@RequestMapping(value = "/dashboard/reservations")
 	public String getDashboardReservations(Principal principal, Model model, @PageableDefault(size = 5) Pageable pager) {
-		String user = null;
+		String email = null;
 		if (principal != null) {
-			user = principal.getName();
+			email = principal.getName();
+			User user = userService.findUserByEmail(email);
 			model.addAttribute("user", user);
 		}
-		Page<Reservation> reservations = reservationService.findReservationByUser(user, pager);
+		Page<Reservation> reservations = reservationService.findReservationByUser(email, pager);
 		model.addAttribute("reservations", reservations.getContent());
 		Integer nbrePages = reservations.getTotalPages();
 		model.addAttribute("maxPages", nbrePages);

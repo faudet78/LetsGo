@@ -118,6 +118,8 @@ popup
 	href="<%=request.getContextPath()%>/resources/css/introLoader.css">
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/resources/css/ladda.min.css">
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/resources/css/notification.css">
 
 
 <script type="text/javascript"
@@ -150,7 +152,7 @@ popup
 <body>
 	<div class="container">
 		<div class="panel panel-default">
-			<div class="panel-heading">
+			<div class="panel-heading" style="height: 60px;">
 				<security:authorize access="!isAuthenticated()">
 					<h5 class="pull-right">
 						<a style="color: black;"
@@ -164,24 +166,90 @@ popup
 					</h5>
 				</security:authorize>
 				<security:authorize access="isAuthenticated()">
-					<div class="btn-group pull-right">
-						<a class="glyphicon dropdown-toggle " data-toggle="dropdown"><span
-							class="glyphicon glyphicon-user"> </span>${user }<b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li><a
-								href="<spring:url value="/annonces/dashboard/annonces.html"></spring:url>">Vos
-									annonces</a></li>
-							<li><a
-								href="<spring:url value="/annonces/dashboard/reservations.html"></spring:url>">Vos
-									r�servations</a></li>
-							<li><a href="#">Profil</a></li>
-							<li class="divider"></li>
-							<li><a
-								href="<spring:url value="/j_spring_security_logout"></spring:url>">Se
-									deconnecter</a></li>
+					<div class="pull-right">
+					<div class="navbar-default ">
+						<ul class="nav navbar-nav" >
+						<li><a id="dLabel"  data-toggle="dropdown"
+									href="/page.html"><span
+										class="glyphicon glyphicon-bell"></span> </a>
+
+									<ul class="dropdown-menu pull-right notifications" role="menu"
+										aria-labelledby="dLabel">
+
+										<div class="notification-heading">
+											<h4 class="menu-title">Notifications</h4>
+											<h4 class="menu-title pull-right">
+												Afficher tout<i class="glyphicon glyphicon-circle-arrow-right"></i>
+											</h4>
+										</div>
+										<li class="divider"></li>
+										<div class="notifications-wrapper">
+											<a class="content" href="#">
+
+												<div class="notification-item">
+													<h4 class="item-title">Evaluation Deadline 1 · day ago</h4>
+													<p class="item-info">Marketing 101, Video Assignment</p>
+												</div>
+
+											</a> <a class="content" href="#">
+												<div class="notification-item">
+													<h4 class="item-title">Evaluation Deadline 1 · day ago</h4>
+													<p class="item-info">Marketing 101, Video Assignment</p>
+												</div>
+											</a> <a class="content" href="#">
+												<div class="notification-item">
+													<h4 class="item-title">Evaluation Deadline 1 • day ago</h4>
+													<p class="item-info">Marketing 101, Video Assignment</p>
+												</div>
+											</a> <a class="content" href="#">
+												<div class="notification-item">
+													<h4 class="item-title">Evaluation Deadline 1 • day ago</h4>
+													<p class="item-info">Marketing 101, Video Assignment</p>
+												</div>
+
+											</a> <a class="content" href="#">
+												<div class="notification-item">
+													<h4 class="item-title">Evaluation Deadline 1 • day ago</h4>
+													<p class="item-info">Marketing 101, Video Assignment</p>
+												</div>
+											</a> <a class="content" href="#">
+												<div class="notification-item">
+													<h4 class="item-title">Evaluation Deadline 1 • day ago</h4>
+													<p class="item-info">Marketing 101, Video Assignment</p>
+												</div>
+											</a>
+
+										</div>
+										<li class="divider"></li>
+										<div class="notification-footer">
+											<h4 class="menu-title">
+												Afficher tout<i class="glyphicon glyphicon-circle-arrow-right"></i>
+											</h4>
+										</div>
+									</ul></li>
+							<li><a class="dropdown-toggle "
+								data-toggle="dropdown"><span
+									class="glyphicon glyphicon-user"></span> ${user.lastName }<b
+									class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li><a
+										href="<spring:url value="/annonces/dashboard/annonces.html"></spring:url>">Vos
+											annonces</a></li>
+									<li><a
+										href="<spring:url value="/annonces/dashboard/reservations.html"></spring:url>">Vos
+											réservations</a></li>
+									<li><a href="#">Profil</a></li>
+									<li class="divider"></li>
+									<li><a
+										href="<spring:url value="/j_spring_security_logout"></spring:url>">Se
+											deconnecter</a></li>
+
+								</ul></li>
 
 						</ul>
-					</div>
+
+
+					</div></div>
 
 				</security:authorize>
 				<br>
@@ -320,14 +388,14 @@ popup
 							},
 							messages : {
 
-								firstName : "Veuillez saisir un pr�nom!",
+								firstName : "Veuillez saisir un prénom!",
 								lastName : "Veuillez saisir un nom de famille!",
 								email : {
 									required : "Veuillez saisir une adresse email!",
 									email : "L'adresse email que vous avez saisie est invalide!"
 								},
 								username : {
-									remote : "Un compte avec cet identifiant existe dej�!",
+									remote : "Un compte avec cet identifiant existe dejà!",
 									required : "Veuillez saisir un idientifiant!"
 
 								},
